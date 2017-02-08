@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var arr1 = [
+        {a: "aa"},
+        {b: "b"},
+        {c: "c"},
+        {d: "d"},
+        {e: "e"},
+    ];
+    var arr2 = [
+       [{a:"a"}, "a"],[{b:"b"}, "b"],
+    ];
+    var arr3 = [
+        {a: "aa"},
+        {b: "b"},
+        {c: "c"},
+        {d: "d"},
+        {e: "e"},
+    ];
+    var m = new Map(arr2);
+    console.log(m.size);
+    m.delete(arr2[{a:"a"}]);
+    console.log(m);
+    console.log(m.entries());
+
+
+</script>
+</body>
+</html>

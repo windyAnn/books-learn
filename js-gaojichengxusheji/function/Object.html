@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    function displayInfo(args) {
+        var output = "";
+        if (typeof args.name == "string"){
+            output += "name:" + args.name + "\n";
+        }
+        if (typeof args.age == "number"){
+            output += "age:" + args.age + "\n";
+        }
+        alert(output);
+    }
+    displayInfo({
+        name: "aa",
+        age: 10
+    });
+    displayInfo({
+        name:  "bb"
+    });
+    */
+/*
+
+    var person = {
+        name: "nnn"
+    };
+    var propertyN = "name";
+    alert(person[propertyN]);  //nnn,这里竟然可以表示 propertyName是person里面的name？？？
+    */
+
+/*
+//判断数组
+var arr = [];
+    if (Array.isArray(arr)){
+        alert("aa");
+    }
+    */
+/*
+var colors = ["red", "blue"];
+   var str = colors.toString();
+    alert(colors);
+
+    if (Array.isArray(colors)){
+        alert("aaa");
+    }
+    */
+/*
+var colors = ["red", "blue"];
+    alert(colors.toString());
+    alert(colors.valueOf());
+    alert(colors);
+    if (Array.isArray(colors)){   //还是一个数组
+        alert("aaa");   //aaa
+    }
+    */
+
+var person1 = {
+    toLocaleString: function () {
+        return "niko + \n";
+    },
+    toString: function () {
+        return "nikosss + \n";
+    }
+};
+
+var person2 = {
+    toLocaleString: function () {
+        return "gri + \n" ;
+    },
+    toString: function () {
+        return "grissss + \n"
+    }
+} ;
+var person = [person1, person2];
+    alert(person);  //nikosss  +
+                     //grissss +    //这里为什么这样子？？？
+    alert(person.toString());//nikosss  +
+                              //grissss +    //toLocalString和toString方法在这里结果是一样的。
+    alert(person.toLocaleString());
+    //niko  +
+    //gri +
+    var a = {"nnn": "aa", "ccc":"bbb"}
+
+</script>
+
+</body>
+</html>

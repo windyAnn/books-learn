@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<input type="button"  class="btn" value="click">
+<script>
+    /*
+    //全局作用域
+    //相同点：
+    var age = 29;
+    function sayAge() {
+        alert(this.age);
+    }
+    alert(window.age);//29
+    window.sayAge();//29
+    sayAge();//29
+    */
+    /*
+    //不同点：
+    var age = 29;
+    window.color = "red";
+    delete window.age;
+    alert(window.age);  //29 这里没有删除，IE9一下会抛出错误
+    delete window.color;
+    alert(window.color);//undefined, 已被删除
+    */
+    /*
+    var newV1 = window.oldV;
+    alert(newV1);  //undefined
+    var newV = oldV;  //抛出错误  oldV没有定义
+*/
+   // document.getElementsByClassName("btn")[0].onclick = function () {  //};
+    /*
+        var  baiduWin = window.open("https://www.baidu.com/", "wroWindow", "height=400,width=400,top=10,left=10,resizable=yes");
+baiduWin.resizeTo(500,500);
+*/
+    /*
+    var result = prompt("what is your name", "");
+    if (result != null){
+        alert("welcome" + result);
+    }
+    *//*
+    function getQueryStringArgs() {
+        var qs = (location.search.length>0 ? location.search.substring(1) : ""),
+                args = {},
+                items = qs.length ? qs.split("&") : [],
+                item = null,
+                name = null,
+                value = null,
+                i ,
+                len = items.length;
+        for (i=0; i<len; i++){
+            item = items[i].split("=");
+            name = decodeURIComponent(item[0]);
+            value = decodeURIComponent(item[1]);
+            if (name.length){
+                args[name] = value;
+            }
+        }
+        return args;
+    }
+    var args = getQueryStringArgs();
+    console.log(args);*/
+    /*_ijt:
+     "ak690pqn7uv68c3oegj6qgt01n"
+     __proto__
+     :
+     Object
+     */
+  /*  setTimeout(function () {
+        location.href = "https://www.baidu.com/";
+    },1000);//加载到百度页面
+    */
+  /*
+  setTimeout(function () {
+      location.replace("https://www.baidu.com/");
+  }, 1000)//加载到百度页面,后退被禁止掉了
+  */
+  /*
+  function hasPlugin(name) {
+      name = name.toLowerCase();
+      alert(navigator.plugins.length);
+      for (var i=0; i<navigator.plugins.length; i++){
+          if (navigator.plugins[i].name.toLowerCase().indexOf(name) > -1){
+              return true;
+          }
+      }
+      return false;
+  }
+  alert(hasPlugin("flash"));//true
+  */
+  /*
+  var cody = {
+      name: "aa",
+      age: 26
+  };
+  for (key in cody){
+      alert(key);  //key:name和age
+  }
+  */
+  var myF = function (x, y, z) {
+      return x;
+  };
+  alert(myF.toString());//弹出整个函数
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var Folder = function (name) {
+        this.name = name;
+        this.parent = null;
+        this.files = [];
+    };
+    Folder.prototype.add = function (file) {
+        file.parent = this;  //this  就是新建得folder，，，，  new Folder(aa)
+        this.files.push(file);
+    };
+    Folder.prototype.scan = function () {
+        console.log('开始扫描' + this.name);
+        for (var i = 0; i < this.files.length; i++){
+            this.files[i].scan();
+        }
+    };
+    Folder.prototype.remove = function () {
+        if (!this.parent){
+            return;
+        }
+        for (var files = this.parent.files, l = files.length -1; l >= 0; l--){
+            var file = files[l];
+            if (file = this){
+                files.splice(l, 1);
+            }
+        }
+    };
+
+
+    //file
+
+    var File = function (name) {
+        this.name = name;
+        this.parent = null;
+
+    };
+    File.prototype.add = function (file) {
+        throw  new Error('不能添加');
+    };
+    File.prototype.scan = function () {
+        console.log('开始扫描' + this.name);
+    };
+    File.prototype.remove = function () {
+        if (!this.parent){
+            return;
+        }
+        for (var files = this.parent.files, l = files.length -1; l >= 0; l--){
+            var file = files[l];
+            if (file = this){
+                files.splice(l, 1);
+            }
+        }
+    };
+    var folder = new Folder('学习资料');
+    var folder1 = new Folder('javascript');
+    var file1 = new File('nodejs');
+    folder1.add(file1);
+    folder.add(folder1);
+    folder1.remove();
+    folder.scan();
+</script>
+</body>
+</html>

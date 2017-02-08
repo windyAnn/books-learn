@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="btn" id="btn">
+<script>
+    var getSingle = function (fn) {  //管理的作用，也就是看有没有创建div
+        var result;
+        return function () {
+            return result||(result=fn.apply(this, arguments));
+        };
+    };
+    var createLoginLayer = function () {   //创建div， 可变的  可以创建别的东西  input啊   等
+        var div = document.createElement('div');
+        div.innerHTML = '登录界面';
+        div.style.display = 'none';
+        document.body.appendChild(div);
+        return div;
+    };
+    var createSingleLoginLayer = getSingle(createLoginLayer); //连接管理层和创建层
+    document.getElementById('btn').onclick = function () {
+        var loginLayer = createSingleLoginLayer();
+        loginLayer.style.display = 'block';
+    }
+
+</script>
+</body>
+</html>

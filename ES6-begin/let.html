@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var n = function () {
+        var a = [];
+        for (let i = 0; i < 10; i++){
+            a[i] = function () {
+              return function () {
+                  console.log(i);
+              }
+            }()
+        }
+        return a;
+    }();
+
+  n[1]();
+    var a = [];
+    for (let i = 0; i < 10; i++) {
+        a[i] = function () {
+            console.log(i);
+        };
+    }
+    a[6](); // 6
+</script>
+</body>
+</html>

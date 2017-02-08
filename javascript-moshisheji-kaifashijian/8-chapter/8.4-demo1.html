@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var saleOffice = {};
+    saleOffice.clientList = [];
+    saleOffice.listen = function (key, fn) {
+        if (!this.clientList[key]){
+            this.clientList[key] = [];
+        }
+        this.clientList[key].push(fn);
+    };
+    saleOffice.trigger = function () {
+        var  key = Array.prototype.shift.call(arguments);  //取第一个参数
+        var fns = this.clientList[key];  //取出相对应的函数
+        if (!fns || fns.length === 0){
+             return false;
+        }
+        for (var i = 0, fn; fn = fns[i++];){
+            fn.apply(this,arguments);
+        }
+
+    };
+    saleOffice.listen("square88", function (price) {
+        console.log('价格=' + price);
+    });
+    saleOffice.listen("square110", function (price) {
+        console.log('价格=' + price);
+    });
+    saleOffice.trigger("square88", 2000);
+
+
+</script>
+</body>
+</html>

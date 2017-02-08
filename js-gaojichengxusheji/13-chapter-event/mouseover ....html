@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style rel="stylesheet" type="text/css">
+    .parent1{
+        width: 800px;
+        height: 1500px;
+        border: 1px solid red;
+        position: relative;
+    }
+    .parent2{
+        width: 600px;
+        height: 400px;
+        border: 1px solid black;
+        position: absolute;
+        bottom: 0;
+    }
+    .child{
+        width: 400px;
+        height: 200px;
+        border: 1px solid green;
+        position:absolute;
+        bottom: 0;
+    }
+</style>
+<body>
+<!--div class="parent1">
+    <div class="parent2">
+        <div class="child">
+
+        </div>
+    </div>
+</div-->
+<textarea id="myText"></textarea>
+<script>
+    var EventUtil = {
+        addHandler: function (ele, type, handler) {
+            if (ele.addEventListener){
+                ele.addEventListener(type, handler, false);
+            }else if (ele.attachEvent){
+                ele.attachEvent("on"+type, handler);
+            }else {
+                ele["on" + type] = handler;
+            }
+        },
+        getEvent: function (event) {
+            return  event ? event : window.event;
+        },
+        getTarget: function (event) {
+            return event.target || event.srcElement;
+        },
+        preventDefault: function (event) {
+            if (event.preventDefault){
+                event.preventDefault();
+            } else {
+                event.returnValue = false;
+            }
+        },
+        stopPropagation: function () {
+            if (event.stopPropagation){
+                event.stopPropagation();
+            } else {
+                event.cancelBubble = true;
+            }
+        },
+
+        removeHander: function (ele, type, handler) {
+            if (ele.removeEventListener){
+                ele.removeEventListener(type, handler, false);
+            }else if (ele.detachEvent){
+                ele.detachEvent("on"+type, handler);
+            }else {
+                ele["on" + type] = null;
+            }
+        },
+        getRelatedTarget: function (event) {
+            if (event.relatedTarget){
+                return event.relatedTarget;
+            }else if (event.toElement){
+                return event.toElement;
+            }else if (event.fromElement){
+                return event.fromElement;
+            }else {
+                return null;
+            }
+        },
+        getWheelDelta: function (event) {
+            if (event.wheelDelta){
+                return (client.engine.opera && client.engine.opera <9.5 ? //client undefined
+                        -event.wheelDelta : event.wheelDelta);
+            }else {
+                return -event.detail * 40;
+            }
+        }
+    };
+    /*
+var div2 = document.querySelector(".parent2"),
+        div1 = document.querySelector(".parent1");
+ div1.onmouseenter = function () {
+        alert("aa");
+    };
+    div2.onmouseenter = function () {
+        alert("bb");
+    };
+     div1.onmouseover = function () {
+        alert("aa");
+    };
+    div2.onmouseover = function () {
+        alert("bb");
+    };
+    //当进入div2时  弹出顺序aa   bb，， 其实效果是一样的。。。不知哪里有差别
+
+ EventUtil.addHandler(div1, "mouseouver", function () {
+     alert("aa")
+ });
+    EventUtil.addHandler(div2, "mouseouver", function () {
+    alert("bb")
+}); */
+    /*
+    (function () {
+        function handlerMouseWheel(event) {
+            var e = EventUtil.getEvent(event);
+
+            alert(e.wheelDelta);
+        }
+        EventUtil.addHandler(document, "mousewheel", handlerMouseWheel);
+        EventUtil.addHandler(document, "DOMMouseScroll", handlerMouseWheel);
+    })()
+    */
+
+
+</script>
+</body>
+</html>

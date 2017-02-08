@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var Type = {};
+    for (var i=0,type; type=["String", "Array", "Number"][i++];){
+        (function (type) {
+            Type["is"+type] = function (obj) {
+                return Object.prototype.toString.call(obj) === "[object" + type + "]";
+            }
+        })(type);
+    }
+    Type.isArray([]);
+    Type.isString("str");
+    (function () {
+        function Dog(name, breed, color, sex) {
+            this.name = name;
+            this.breed = breed;
+            this.color = color;
+            this.sex = sex;
+        }
+
+      /* var theDog = new Dog('Gabby', 'Lab', 'chocolate', 'female');
+        alert(theDog.toString());*/ // object Object
+
+        Dog.prototype.toString = function dogToString() {
+            var ret = 'Dog ' + this.name + ' is a ' + this.sex + ' ' + this.color + ' ' + this.breed;
+            return ret;
+        };
+        var theDog = new Dog('Gabby', 'Lab', 'chocolate', 'female');
+       alert( theDog.toString());//Dog Gabby is a female chocolate Lab
+
+    })()
+</script>
+</body>
+</html>

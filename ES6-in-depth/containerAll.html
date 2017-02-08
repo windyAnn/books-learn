@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function* fibs() {
+        var a = 0,
+            b = 1;
+        while (true){
+            yield a;
+            [a, b] = [b, a + b];
+        }
+    }
+  //  var six = fibs();
+    var [f, se, th, four, fif, six] = fibs();
+  //  var b = six.next();
+  //  console.log(b);
+    console.log(f);
+</script>
+</body>
+</html>

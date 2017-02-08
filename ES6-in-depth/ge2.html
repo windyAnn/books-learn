@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+   /* function splitI(icons, rLen) {
+        var rows = [];
+        for (var i = 0; i < icons.length; i += rLen){
+            rows.push(icons.slice(i, i + rLen));
+        }
+        return rows;
+    }
+   var a =  splitI(['a', 'b', 'c', 'd'], 2);
+    console.log(a);*/
+   function* splitIc(icons, rLen) {
+       for (var i = 0; i < icons.length; i +=rLen){
+           yield icons.slice(i, rLen);
+       }
+   }
+   var a =  splitIc(['a', 'b', 'c', 'd'], 2);
+   console.log(a);
+</script>
+</body>
+</html>

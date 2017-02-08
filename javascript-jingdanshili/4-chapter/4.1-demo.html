@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Tune(tit, art) {
+        var title = tit,
+            artist = art;
+        Tune.prototype.contactTitArt = function () {    //既充当了Tone的方法  又是他内部的原型方法，使其变成了静态方法
+            return title + "  " + artist;
+        }
+    }
+    var sad = new Tune("sad song", "sad singer");
+    var happy = new Tune("happy song", "happy singer");
+    console.log(sad.contactTitArt());
+</script>
+</body>
+</html>

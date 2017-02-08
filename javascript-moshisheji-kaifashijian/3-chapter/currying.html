@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    var myCost  = 0;
+    var cost = function (money) {
+        myCost += money;
+    };
+    cost(100);
+    cost(200);
+    alert(myCost);
+    */
+    function aa() {
+        var arr = [];
+        arr.push(arguments);
+        console.log(arr);//[arguments[2]]
+        var arr2 = [];
+        [].push.apply(arr2, arguments);
+        console.log(arr2);//[1,2]
+        var arr3 = [];
+        Array.prototype.push.apply(arr3, arguments);
+        console.log(arr3);//[1,2]
+    }
+    aa(1,2);
+
+</script>
+</body>
+</html>

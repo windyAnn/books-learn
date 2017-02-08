@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    var cache = {};
+    var mult = function () {
+        var args = Array.prototype.join.call(arguments, ",");
+        if (cache[args]){
+            return cache[args];
+        }
+        var a = 1;
+        for (var i=0,l=arguments.length; i<l; i++){
+            a = a*arguments[i];
+        }
+        return cache[args] = a;
+    };
+    alert(mult(1,2,3));
+    */
+
+    //封装
+    var mult = (function () {
+        var cache = {};
+        var calculate = function () {
+            var a = 1;
+            for (var i=1,l=arguments.length; i<l; i++){
+                a = a*arguments[i];
+            }
+            alert(this);  //window
+            return a;
+        };
+        return function () {
+            var args = Array.prototype.join.call(arguments, ",");
+            if (args in cache){
+                return cache[args];
+            }
+            return cache[args] = calculate.apply(null, arguments);
+        }
+    })();
+    alert(mult(1,2,3));  //存储了传过来的参数
+    alert(mult(1,2,3));
+</script>
+</body>
+</html>

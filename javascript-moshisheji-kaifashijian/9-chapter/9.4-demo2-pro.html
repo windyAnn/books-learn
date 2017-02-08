@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="animate.js"></script>
+</head>
+<body>
+<div id="ball" style="position: absolute; background: #000;width: 50px;height: 50px;left: 0;"></div>
+输入小球移动的位置<input id="pos" type="text">
+<button id="moveBtn">moveBtn</button>
+<button id="cancelBtn">cancelBtn</button>
+<button id="stopBtn">stopBtn</button>
+<script>
+    var ball = document.getElementById('ball'),
+        pos = document.getElementById('pos'),
+        moveBtn = document.getElementById('moveBtn');
+    var cancelBtn = document.getElementById('cancelBtn');
+    var stopBtn = document.getElementById('stopBtn');
+   //var ballMove = function () {
+        var initPos = ball.offsetLeft;
+        //命令模式
+        var MoveCommand = function (receiver, pos) {
+            this.receiver = receiver;
+            this.pos = pos;
+            this.oldPos = null;
+            this.curPos = null;
+        };
+        MoveCommand.prototype.execute = function () {
+            this.curPos = this.receiver.start('left', this.pos, 1000, 'easeIn');   //animate  才有start方法
+            this.oldPos = this.receiver.dom.getBoundingClientRect()['left'];
+
+        };
+        MoveCommand.prototype.undo = function () {
+            this.receiver.start('left', this.oldPos, 1000, 'easeIn')
+        };
+
+        MoveCommand.prototype.stop =function () {
+            this.receiver.start('left', this.curPos, 1000, 'easeIn')
+        };
+        var moveCommand;
+        moveBtn.onclick = function () {
+            var animate = new Animate(ball);
+            moveCommand = new MoveCommand(animate, pos.value);
+            moveCommand.execute();
+            //怎么获取到已经走到哪儿呢呢
+        };
+
+
+        cancelBtn.onclick = function () {
+            moveCommand.undo();
+        };
+    stopBtn.onclick = function () {
+        moveCommand.stop();
+    };
+    //}();
+
+
+
+
+    // var moveCommand = new MoveCommand(ball, 1000);   //这个动作是要在点击了btn之后才能执行
+</script>
+
+</body>
+</html>

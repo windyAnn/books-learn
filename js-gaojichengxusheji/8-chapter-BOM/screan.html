@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="全屏" class="screen">
+
+<script>
+    /*
+    document.getElementsByClassName("screen")[0].onclick = function () {
+        window.resizeTo(800, 800);  //无法实现该功能
+    }
+    */
+    /*if (xhr.open){
+        alert("aa");
+    }*/
+    /*
+    var xhr = new ActiveXObject("Microsoft.XMLHttp");  //只能在ie内使用
+    function isHostMethod(obj, pro) {
+        var t = typeof obj[pro];
+        return t == "function" ||(!!(t == "object" && obj[pro])) || t == "unknown";
+    }
+    var res = isHostMethod(xhr, "open");
+    alert(res);
+    */
+    var hasDontEnumQuirk = function () {
+        var o = {toString: function () {
+
+        }} ;
+        for (var pro in o){
+            if (pro == "toString"){
+                return false;
+            }
+        }
+        return true;
+    };
+    alert(hasDontEnumQuirk());  //false,有toString， ie8 一下不行
+
+</script>
+</body>
+</html>

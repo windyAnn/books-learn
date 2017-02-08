@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="btn" id="btn">
+<script>
+    var getSingle = function (fn) {  //管理的作用，也就是看有没有创建div
+        var result;
+        return function () {
+            return result||(result=fn.apply(this, arguments));
+        };
+    };
+    var createLoginLayer = function () {   //创建div， 可变的  可以创建别的东西  input啊   等
+       var iframe = document.createElement('iframe');
+        document.body.appendChild(iframe);
+        return iframe;
+    };
+
+    var createSingleLoginLayer = getSingle(createLoginLayer); //连接管理层和创建层
+    document.getElementById('btn').onclick = function () {
+        var loginLayer = createSingleLoginLayer();
+        loginLayer.src = 'https://www.baidu.com/';
+    };
+ /*
+    var getSingle = function (fn) {  //管理的作用，也就是看有没有创建div
+        var result;
+        return function () {
+            return result||(result=fn.apply(this, arguments));
+        };
+    };
+    var createLoginLayer = function (element) {   //创建div， 可变的  可以创建别的东西  input啊   等
+        var elementObj;
+        elementObj = document.createElement(element);
+
+        renderEle&&renderEle.apply(this, elementObj);
+        document.body.appendChild(elementObj);
+        return elementObj;
+    };
+
+    var createSingleLoginLayer = getSingle(createLoginLayer); //连接管理层和创建层
+    document.getElementById('btn').onclick = function () {
+        var loginLayer = createSingleLoginLayer();
+        loginLayer.src = 'https://www.baidu.com/';
+    }
+            */
+</script>
+</body>
+</html>

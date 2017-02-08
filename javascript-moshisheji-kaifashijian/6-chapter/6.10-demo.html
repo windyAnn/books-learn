@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var mult = function () {
+        console.log('begin');
+        var a = 1;
+        for (var i = 0, l = arguments.length; i < l; i++ ){
+             a = a * arguments[i];
+        }
+        return a;
+    };
+    var proxyMult = (function () {
+        var cache = {};
+        return function () {
+            var args = Array.prototype.join.call(arguments, ',');
+          //  console.log(arguments.sort());  //arguments.sort is not a function(…)
+            console.log(args + 'aa' + arguments);
+            if (args in cache){
+                return cache[args];
+            }
+            return cache[args] = mult.apply(this,arguments);
+        };
+    })();
+    console.log(proxyMult(1,2,3,4));
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h2>Greetings</h2>
+    <div class="inner">Hello</div>
+    <div class="inner">Goodbye</div>
+</div>
+<script>
+    var fibonacci = function () {
+        var memo = [0, 1];
+        var fib = function (n) {
+            var result = memo[n];
+            if (typeof result != 'number'){
+                result = fib(n-1) + fib(n-2);
+            }
+            return result;
+        };
+        return fib;
+    }();
+   var fib =function (n) {
+       return n<2 ? n: fib(n - 1) + fib(n - 2);
+   };
+   console.time('non-memo');
+   for (var i = 0; i <= 30; i++){
+       console.log(i + "" + fib(i));//这个速度快很多哦
+   }
+    console.timeEnd('non-memo');
+
+    console.time('memo');
+    for (var i = 0; i <= 30; i++){
+        console.log(i + "" + fibonacci(i));
+    }
+    console.timeEnd('memo');
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    //模块模式
+    var application = function () {
+        var components = new Array();
+        var obj = {};
+        components.push(obj);
+        return {
+            getComponentCount: function () {
+                return components.length;
+            },
+            registerComponent: function (component) {
+                if (typeof component == "object"){
+                    components.push(component);
+                }
+            }
+        }
+    }();
+    var obj1 = {};
+    application.registerComponent(obj1);
+    alert(application.getComponentCount());  //2
+    //增强的模块模式
+    var application2 = function () {
+        var privateV = 10;
+        function privateF() {
+            return false;
+        }
+        function CustomType() {
+
+        }
+        var object = new CustomType();
+        object.publicPro = true;
+        object.publicM = function () {
+            privateV++;
+            return privateF();
+        };
+        return object;
+    }();
+    alert(application2.publicM());  //false
+    var application3 = function () {
+        var components = new Array();
+        components.push(new Object());
+        function BaseComponent() {
+
+        }
+        var app = new BaseComponent();
+        app.getComponentCount = function () {
+            return components.length;
+        };
+        app.registerComponent = function (component) {
+            if (typeof component == "object"){
+                components.push(component);
+            }
+        };
+        return app;
+    }();
+    alert(application3.getComponentCount());//1
+    */
+    //BOM
+
+
+</script>
+</body>
+</html>

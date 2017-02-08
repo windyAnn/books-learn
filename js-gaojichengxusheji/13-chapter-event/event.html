@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<input type="button" value="btn" id="btn">
+<body>
+<script>
+    /*
+    //addEventListener可以监听多个事件，而onclick只能监听一个事件
+    var btn = document.querySelector("#btn");
+    btn.addEventListener("click", function () {
+        alert(this.id);
+    },false);
+    btn.addEventListener("click", function () {
+        alert("hello");
+    },false);
+    //btn  hello
+  */
+    /*ar handler = function () {
+        alert(this.id);
+    };
+    var btn = document.querySelector("#btn");
+    btn.addEventListener("click", handler,false);
+
+    //取消事件监听
+    btn.removeEventListener("click", handler,false)  ;*/
+    //这样其实不好，必须将该对象放到最前面，如果做成函数就任何地方都可以用到
+    /*
+    function EventUtil() {
+        var obj = new Object();
+        obj.addHandler = function (ele, type, handler) {
+            if (ele.addEventListener) {
+                ele.addEventListener(type, handler, false);
+            } else if (ele.attachEvent) {
+                ele.attachEvent("on" + type, handler);
+            } else {
+                ele["on" + type] = handler;
+            }
+        };
+        obj.removeHandler = function (ele, type, handler) {
+            if (ele.removeEventListener) {
+                ele.removeEventListener(type, handler, false);
+            } else if (ele.detachEvent) {
+                ele.detachEvent("on" + type, handler);
+            } else {
+                ele["on" + type] = null;
+            }
+        };
+        return obj;
+    }
+
+
+    var btn = document.querySelector("#btn");
+    var handler = function () {
+        alert(this.id);
+    };
+    var eventUtil = EventUtil();
+    eventUtil.addHandler(btn, "click", handler);
+
+*/
+    var EventUtil = {
+        addHandler: function (ele, type, handler) {
+            if (ele.addEventListener){
+                ele.addEventListener(type, handler, false);
+            }else if (ele.attachEvent){
+                ele.attachEvent("on"+type, handler);
+            }else {
+                ele["on" + type] = handler;
+            }
+        },
+        getEvent: function (event) {
+            return  event ? event : window.event;
+        },
+        getTarget: function (event) {
+            return event.target || event.srcElement;
+        },
+        preventDefault: function (event) {
+            if (event.preventDefault){
+                event.preventDefault();
+            } else {
+                event.returnValue = false;
+            }
+        },
+        stopPropagation: function () {
+            if (event.stopPropagation){
+                event.stopPropagation();
+            } else {
+                event.cancelBubble = true;
+            }
+        },
+
+        removeHander: function (ele, type, handler) {
+            if (ele.removeEventListener){
+                ele.removeEventListener(type, handler, false);
+            }else if (ele.detachEvent){
+                ele.detachEvent("on"+type, handler);
+            }else {
+                ele["on" + type] = null;
+            }
+        }
+    };
+    //onload事件还是很难理解
+    EventUtil.addHandler(window, "load", function () {
+        var image = document.createElement("img");
+        EventUtil.addHandler(image, "load", function (e) {
+            e = EventUtil.getEvent(e);
+            alert(EventUtil.getTarget(e).src);
+        });
+        document.body.appendChild(image);
+        image.src = "1.jpg";
+    });
+     EventUtil.addHandler(window, "load", function () {
+        var img = new Image();
+        img.onload =function () {
+            document.body.appendChild(img);
+        };
+
+        document.body.appendChild(img);
+        img.src = "1.jpg";
+     });
+</script>
+</body>
+</html>

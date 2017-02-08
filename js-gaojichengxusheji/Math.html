@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    //max和min方法
+    var max = Math.max(1,3,9,8);
+    alert(max);  //9
+    var min = Math.min(1,3,9,8);
+    alert(min);//1
+    var value = [1,3,9,8];
+    var max1 = Math.max(value); //max函数不能接受数组等对象，只能接受一系列的数值
+    alert(max1);//NaN
+    var max2 = Math.max.apply(Math,value);  //相当于指向Math这个对象，
+    alert(max2);  //9
+    */
+    /*
+    alert(Math.ceil(25.9));//26  向上取整
+    alert(Math.floor(25.9));//25向下取整
+    alert(Math.round(25.9));//26   四舍五入
+    */
+    /*
+    //random方法：  返回介于0-1之间的随机数，不包括0和1.
+    function selectFrom(lV, uV) {
+        var choices = uV - lV + 1;
+        return Math.floor(Math.random()*choices + lV);
+    }
+    alert(selectFrom(2, 10));  //介于2-10之间的整数
+    var colors = ["red", "green", "blue", "yellow", "black"];
+    var num = selectFrom(0, colors.length-1);
+    var color = colors[num];
+    alert(color)
+    */
+    /*
+    var person = {};
+    person.name = "aaa";
+    alert(person.name);//aaa
+    Object.defineProperty(person, "name", {
+        writable: false,
+        value: "bbb"
+    });
+    person.name = "ccc";
+    alert(person.name);  //bbb
+    */
+    /*
+    var person = {};
+    Object.defineProperty(person, "name", {
+        configurable: false,
+        value: "bbb"
+    });
+    person.name = "ccc";
+    delete person.name;
+    alert(person.name);  //bbb
+    */
+    /*
+    var book = {
+        _year: 2004,
+        edition: 1
+    };
+    Object.defineProperty(book,"year", {
+        get: function () {
+            return this._year;
+        },
+        set: function (newValue) {
+            if (newValue > 2004){
+                this._year = newValue;
+                this.edition += newValue - 2004;
+            }
+        }
+    });
+    book.year = 2005;  //这里year直接赋值啦，直接默认传进来的参数就是2005吗？调试一下
+    alert(book.edition);  //2
+  book.year.set(2006); //Uncaught TypeError: book.year.set is not a function(…)
+    alert(book.edition);   //相当于get和set这两个方法是不用调用的呀，直接赋值就可以用的呀
+    */
+    /*
+    var book = {
+    };
+    Object.defineProperties(book, {
+        _year: {
+            value: 2004
+        },
+        edition: {
+            value:1
+        },
+        year: {
+            get: function () {
+                return this._year;
+            },
+            set: function (newValue) {
+                if (newValue > 2004){
+                    this._year = newValue;
+                    this.edition += newValue;  //这行没有没执行哦  百思不得其解？？？？，就这一行不执行
+                }
+            }
+        }
+
+    });
+    book.year = 2005;
+    alert(book.edition);//1
+    */
+    /*
+    var book = {
+    };
+    Object.defineProperties(book, {
+        _year: {
+            value: 2004
+        },
+        edition: {
+            value:1
+        },
+        year: {
+            get: function () {
+                return this._year;
+            },
+            set: function (newValue) {
+                if (newValue > 2004){
+                    this._year = newValue;
+                    this.edition += newValue;  //这行没有没执行哦  百思不得其解？？？？，就这一行不执行
+                }
+            }
+        }
+
+    });
+   var descriptor = Object.getOwnPropertyDescriptor(book, "_year");
+    alert(descriptor.value); //2004
+    alert(descriptor.configurable);//false  当用defineProperties时候configurable九尾false
+    alert(descriptor.enumerable);//false,应该是不怎么用
+    alert(typeof descriptor.get);  //undefined
+    var descriptor1 = Object.getOwnPropertyDescriptor(book, "year");
+    alert(descriptor1.value);//undefined
+    alert(descriptor1.enumerable);  //false
+    alert(descriptor1.get);//function
+    */
+    function Person() {
+
+    }
+    Person.prototype.name = "n";
+    Person.prototype.age = 20;
+    p1 = new Person();
+    delete p1.name;  //原型对象上的属性是删不掉的  因为是共有的
+    alert(p1.name);  //n
+
+</script>
+</body>
+</html>

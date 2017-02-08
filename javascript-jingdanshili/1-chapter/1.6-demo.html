@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .found{
+        color: red;
+    }
+</style>
+<body>
+<form id="textsearch">
+    <textarea id="incoming" cols="150" rows="10"> </textarea>
+    <p>
+        search pattern: <input id="pattern" type="text">
+    </p>
+</form>
+<button id="searchSubmit">Search for pattern</button>
+<div id="searchResult"></div>
+
+<script>
+    document.getElementById('searchSubmit').onclick = function () {
+        var pattern = document.getElementById('pattern').value,
+            re = new RegExp(pattern, 'g'),
+            //获取字符串
+            searchStr = document.getElementById('incoming').value;
+        var matchArr ,
+            resultStr = '<pre>',
+            first = 0,
+            last = 0;
+        while ((matchArr = re.exec(searchStr)) != null){
+            last = matchArr.index;
+            //获取所有匹配的字符串，将其连接起来
+            resultStr += searchStr.substring(first, last);
+         //   substring  取得就是(first, last) 之间的字符  不包括最后一个
+
+            resultStr += '<span class="found">'+ matchArr[0] + '</span>';
+            first = re.lastIndex;
+            //找到第一个匹配的后，匹配完后的第一个  aaa bb c 如果匹配的是bb那么就是从b后面的空格开始的index
+        }
+        resultStr += searchStr.substring(first, searchStr.length);
+        document.getElementById('searchResult').innerHTML = resultStr;
+
+    }
+</script>
+</body>
+</html>

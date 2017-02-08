@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="user name aa" id="btn1">
+
+</div>
+<!--input type="button" value="btn" id="btn" data-appId = "12"-->
+<script>
+    /*
+    var classNames = document.querySelector("div").className.split(" ");
+    var pos , i , len ;
+    for (i=0; i<classNames.length; i++){
+        if (classNames[i] == "user"){
+            pos = i;
+            break;
+        }
+    }
+    classNames.splice(i, 1);//删掉第i个（1个）
+    classNames = classNames.join(" "); //一定要把类名从新拼接起来
+    alert(classNames);//name aa
+    */
+    /*
+    var div = document.querySelector("div");
+    div.className.remove("user");
+    alert( div.className); //如果用className报错，没有remove的方法
+    div.classList.add("current");
+    alert( div.classList);//name aa current
+    div.classList.toggle("user");
+    alert( div.classList);//name aa current user
+    if (div.classList.contains("user") && !div.classList.contains("bg")){
+        alert("aa");
+    } //aa
+    //支持classList的浏览器火狐3.6+和chrome，兼容性貌似不好哦
+    */
+    /*
+    var btn = document.querySelector("#btn");
+    btn.focus();
+    alert(document.activeElement == btn);  //true
+    alert(document.hasFocus());  //true  新增的
+    */
+    /*
+    var btn = document.querySelector("#btn");
+    var appIda = btn.dataset.appId;
+    alert(appIda); //undefined*/
+    /* */
+    /*
+    var btn = document.querySelector("#btn1");
+    btn.innerHTML = "<script defer> alert('aa')<\/script>" ; //可以存在的,还是可以存在，但是没有弹出aa
+*/
+    function Person(name) {
+        this.name = name;
+    }
+    Person.prototype.getName = function () {
+        return this.name;
+    };
+    var objectFactory = function () {
+        var obj = new Object(),
+                Constructor = [].shift.call(arguments);
+        obj.__proto__ = Constructor.prototype;
+        var ret = Constructor.apply(obj, arguments);
+        return typeof ret ==='object' ? ret : obj;
+    };
+    var a = objectFactory(Person, 'seve');
+    console.log(a.name);
+    console.log(a.getName);
+    console.log(Object.getPrototypeOf(a) === Person.prototype);
+
+
+</script>
+</body>
+</html>

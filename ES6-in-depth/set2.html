@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<script>
+    var w = new Set(["aa", "bb", "cc"]);
+
+    if(w.has("aa")){
+        console.log("mm")
+    }
+    if(w[1]){  //不支持
+        console.log("支持")
+    }
+
+    var arrW = ["aa", "bb", "cc"];
+
+    if(arrW.indexOf("aa") != -1){
+        console.log("nn")
+    }
+    if(arrW[1]){
+        console.log("aa")
+    }
+
+    var div = document.getElementsByTagName("div");
+    console.log(div);
+    var d = new Set(div);
+    console.log(d.size);
+    var arrA = ["aa", "bb", "cc", "dd", "aa"];
+    function toArray(arrA) {
+        var b = new Set(arrA);
+        console.log(b.keys());
+        var newArr = [];
+        b.forEach(function (i) {
+            newArr.push(i);
+        });
+        return newArr;
+    }
+    var newA = toArray(arrA);
+    console.log(newA);
+
+
+</script>
+</body>
+</html>

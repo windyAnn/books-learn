@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="myForm">
+    用户名：<input type="text" name="username">
+    密码：<input type="text" name="password">
+    手机号码：<input type="text" name="phoneNumber">
+    <button type="submit"></button>
+</form>
+<script>
+    var strategies = {
+        isNonEmpty: function (value, errMsg) {
+            if (value === ''){
+                return errMsg;
+            }
+        },
+        minLength: function (value, length, errMsg) {
+            if (value.length < length){
+                return errMsg;
+            }
+        },
+        isMoble: function (value, errMsg) {
+            if (! /1\d{10}/.test(value)){
+                return errMsg;
+            }
+        }
+    };
+    /*            validate类                 */
+    var Validator = function () {
+        this.cache = [];
+    };
+    Validator.prototype.add = function (dom, rules) {
+        var self = this;
+        for (var i = 0, rule; rule = rules[i++];){
+            (function (rule) {
+                var strategyAry = rule.strategy.split(':');
+                var errMsg = rule.errMsg;
+                self.cache.push(function () {
+                    var strategy = strategyAry.shift();
+                    strategyAry.unshift(dom.value);
+                    strategyAry.push(errMsg);
+                    return strategies[strategy].apply(dom, strategyAry);
+                });
+            })(rule);
+        }
+    };
+    Validator.prototype.start = function () {
+        for (var i = 0, validatorFunc; validatorFunc = this.cache[i++];){
+            var errMsg = validatorFunc();
+            if (errMsg){
+                return errMsg;
+            }
+        }
+    };
+    /***        客户调用代码         **/
+    var registerForm = document.getElementById('myForm');
+    var validataFunc = function () {
+        var validator = new Validator();
+        validator.add(registerForm.username, [{
+            strategy: 'isNonEmpty',
+            errMsg: '用户名不能为空'
+        },{
+            strategy: 'minLength:6',
+            errMsg: '不能小于6'
+        }]);
+        var errMsg = validator.start();
+        return errMsg;
+    };
+    registerForm.onsubmit = function () {
+        var errMsg = validataFunc();
+        if (errMsg){
+            alert(errMsg);
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

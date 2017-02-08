@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Book(title, author) {
+        this.getTitle = function () {
+            return "title" + title;
+        };
+        this.getAuthor =function () {
+            return "author" + author;
+        };
+        this.replaceTitle = function (newTit) {
+            var oldTitle = title;
+            title = newTit;
+        };
+        this.replaceAutor = function (newAuthor) {
+            var oldAuthor = author;
+            author = newAuthor;
+        };
+    }
+        function TeachBook(title, author, category) {
+            this.getCategory = function () {
+                return "technical Categoty:" + category;
+            };
+            Book.apply(this,arguments);
+            this.changeAuthor = function (newAuthor) {
+                this.replaceAutor(newAuthor);
+                return this;
+            };
+        }
+        var newBook = new TeachBook('I know things', 'smart author', 'tech');
+    console.log(newBook.changeAuthor('book k.Reader').getAuthor());
+
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="picker">
+    <label>Value1:</label><input type="text" id="a"><br>
+    <label>Value2:</label><input type="text" id="b"><br>
+    <label>Value3:</label><input type="text" id="c"><br>
+    <label>Value4:</label><input type="text" id="d"><br>
+    <button id="validate">validate</button>
+
+</form>
+
+
+<div id="result">
+
+</div>
+<script>
+    document.getElementById("validate").addEventListener("click", function (e) {
+        e.preventDefault();
+        var elems = document.getElementById("picker").elements;
+        var elementArr = {};
+        for (var i = 0; i < elems.length; i++){
+            if (elems[i].type == 'text'){
+                elementArr[elems[i].id] = elems[i].value;
+            }
+        }
+        var str = '';
+      /*  Object.keys(elementArr).forEach(function (key) {
+            var value = elementArr[key];
+            str += key + '->' + value + '<br>';
+        });*/
+
+      for (var key in elementArr){
+          var value = elementArr[key];
+          str += key + '->' + value + '<br>';
+      }
+        document.getElementById('result').innerHTML = str;
+    })
+</script>
+</body>
+</html>

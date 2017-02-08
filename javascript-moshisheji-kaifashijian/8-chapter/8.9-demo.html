@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="count">点我</button>
+<div id="show"></div>
+<script>
+    var Event = function () {
+        var list = {},
+            listen = null,
+            trigger = null;
+        listen = function (key, fn) {
+            if (!list[key]){
+                 list[key] = [];
+            }
+            list[key].push(fn);
+        };
+        trigger = function () {
+            var  key = Array.prototype.shift.call(arguments);
+            //执行fn
+            var fns = list[key];
+            if (!fns){
+                return false;
+            }
+            for (var i = 0; i < fns.length; i++){
+                var fn = fns[i];
+                fn.apply(this, arguments);
+            }
+        };
+        return {
+            listen: listen,
+            trigger: trigger
+        }
+
+    }();
+
+    var a = (function () {
+        var count = 0;
+        var btn = document.getElementById("count");
+        btn.onclick = function () {
+            Event.trigger("add", count++);
+        };
+    })();
+    var b = (function () {
+        var div = document.getElementById("show");
+        Event.listen("add", function (count) {
+            div.innerHTML = count;
+        })
+    })()
+</script>
+</body>
+</html>

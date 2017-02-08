@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+     //构造函数
+     //方法1
+     function Person(name, age) {
+     this.name = name;
+     this.age = age;
+     this.sayName = function () {
+     alert(this.name);
+     };
+     }
+     var p1 = new Person("aa", 26);
+     p1.sayName();  //aa
+     //优化
+     function Person1(name, age) {
+     this.name = name;
+     this.age = age;
+     this.sayName = sayName;
+     }
+     function sayName() {   //全局函数
+     alert(this.name);
+     }
+     var p2 = new Person("bb", 27);
+     p2.sayName();  //bb
+     */
+
+    //原型模式
+
+    /*
+     function----prototype(原型)(是个指针)------>对象：用途：包含（由特定类型的所有实例共享的）属性和方法
+
+     * *//*
+     function Person() {
+     this.name = "aa";
+     this.age = 26;
+     }
+     Person.prototype = {
+     _get: function () {
+     alert(this.name);
+     },
+     _set: function () {
+     alert(this.age);
+     }
+     };
+     var person1 = new Person();
+     var person2 = new Person();
+     person1._get();//aa
+     alert(person1.name);//aa
+     person1.name = "bb";
+     alert(person1.name);  //bb  构造函数内部的属性是可以被复写的，但是不能修改构造函数内部和原型对象上的属性和方法
+     alert(person2.name);  //aa
+
+     /*
+     alert(Person.prototype.isPrototypeOf(person1));  //true//
+     alert(Object.getPrototypeOf(person1) === Person.prototype);  //true
+     alert(Object.getPrototypeOf(person1)._get);  //function
+     */
+    /*
+     function Person() {
+     this.name = "aa";
+     this.age = 26;
+     }
+     Person.prototype = {
+     _get: function () {
+     alert(this.name);
+     },
+     _set: function () {
+     alert(this.age);
+     }
+     };
+     var person1 = new Person();
+     var person3 = new Person();
+     alert(person3.name);  //aa
+     alert(person1.name);   //aa
+     alert(person1.hasOwnProperty("name"));  //true  看出差别了吗
+
+     //
+     function Person1() {
+     }
+     Person1.prototype.name = "cc";
+     var person2 = new Person1();
+     alert(person2.hasOwnProperty("name"));  //false
+     */
+
+    /*  var o = {
+     toString: function () {
+     return "my obj";
+     }
+     };
+     //  alert(o.enumerable);//undefined
+     var b = {
+     get : function () {
+     return "aa";
+     }
+     };
+     //   alert(b.enumerable);
+     alert("hasOwnProperty" in b);  //true,竟然是true哦   也就是原生的这些属性和方法 ???? 都可以for in
+     for (var pro in b){
+     if (pro == "get"){
+     alert("found");  //found
+     }
+     }*/
+/*
+    var b = {
+        get: function () {
+            return "aa";
+        }
+    };
+    if ("hasOwnProperty" in b) {
+        alert("found");  //found
+    }
+    alert("hasOwnProperty" in b);//true   那怎么理解这个
+    for (var pro in b) {
+       console.log(pro);  //get只有一个
+    }
+
+     */
+
+/*
+//Object.keys()方法：
+    // 可以获取原型对象上自定义的属性（不包括自己本身有的constructor属性，也不包括Person里
+    // 定义的this.year之类的属性，如下：）
+    function Person() {
+        this.year = 2005;
+    }
+    Person.prototype.name = "mm";
+    Person.prototype.age = 26;
+    Person.prototype.job = "engineer";
+    var keys = Object.keys(Person.prototype);
+    alert(keys);//name, age, job,  Object.keys()表示包含所有可枚举属性的字符串;
+    console.log(keys);//数组
+
+    var person1 = new Person();
+    person1.name = "nn";
+    person1.age = 25;
+    var p1Key = Object.keys(person1);
+    alert(p1Key);//name, age  只列举了person1的属性
+    */
+/*
+//getOwnPropertyNames获取属性名称，包括不可枚举的属性
+    function Person() {
+        this.year = 2005;
+    }
+    Person.prototype.name = "mm";
+    Person.prototype.age = 26;
+    Person.prototype.job = "engineer";
+    var keys1 = Object.getOwnPropertyNames(Person);
+    alert(keys1);//length,name,arguments,caller,prototype
+    var key2 = Object.getOwnPropertyNames(Person.prototype);
+    alert(key2);//constructor,name,age,job
+    */
+//instanceof 运算符用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性。
+    /*
+     语法EDIT
+     object instanceof constructor
+     参数
+     object  要检测的对象.
+     constructor  某个构造函数
+    */
+    /*
+    function Person() {
+        this.year = 2005;
+    }
+    Person.prototype = {
+        name: "dd",
+        age:  25
+    };
+    var friend = new Person();
+    alert(friend instanceof Object);//true
+    alert(friend instanceof Person);//true
+    alert(friend.constructor == Person);  //false
+    console.log(friend.constructor);//function Object() { [native code] }
+    alert(friend.constructor == Object); //true
+    */
+    /*
+    function Person() {
+    }
+    var person = new Person();
+    Person.prototype = {
+        name: "cc"
+    };
+    alert(person.name);  //undefined
+    */
+    //对于包含引用类型的属性来说，实例化后对其改变会得到共享
+    /*
+    function Person() {
+    }
+    Person.prototype = {
+        friends: ["aa", "bb"]
+    };
+    var person1 = new Person();
+    var person2 = new Person();
+    person1.friends.push("cc");
+    alert(person1.friends);//aa,bb,cc
+    alert(person2.friends);//aa,bb,cc  被共享啦
+    */
+/*
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+        this.friends = ["aa", "bb"];
+    }
+    Person.prototype = {
+        sayName: function () {
+            alert(this.name);
+        }
+    };
+    var person1 = new Person();
+    var person2 = new Person();
+    person1.friends.push("ff");
+    alert(person2.friends);//aa,bb
+    alert(person1.friends);//aa, bb ,ff
+    */
+//
+    /*
+    function SpecialArr() {
+        var values = new Array();
+        values.push.apply(values, arguments);
+        //第一个values是表示最后push完得到一个数组，而后面那个values是表示一个数组对象，
+        // arguments就是表示传进来的参数
+        values.toPipedString = function () {
+            return this.join("|");
+        };
+        return values;
+    }
+    var colors = new SpecialArr("aa" , "bb" , "cc");  //返回：values
+    alert(colors.toPipedString());   //aa|bb|cc|
+    ////返回values的toPipedString方法，最后返回的是this.join("|");而这个this
+    //表示colors，colors表示values，this最终表示values，values表示数组
+    */
+
+
+
+
+</script>
+</body>
+</html>

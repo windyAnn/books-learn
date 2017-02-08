@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    Function.prototype.construct = function (aArgs) {
+        alert(this);
+        var oNew = Object.create(this.prototype);
+        this.apply(oNew, aArgs);
+        return oNew;
+    };
+
+    function Shape() {
+        this.x = 0;
+        this.y = 0;
+    }
+
+    // superclass method
+    Shape.prototype.move = function(x, y) {
+        this.x += x;
+        this.y += y;
+        console.info('Shape moved.');
+    };
+
+    // Rectangle - subclass
+    function Rectangle() {
+        Shape.call(this); // call super constructor.
+    }
+
+    // subclass extends superclass
+    Rectangle.prototype = Object.create(Shape.prototype);
+    Rectangle.prototype.constructor = Rectangle;
+
+    var rect = new Rectangle();
+
+    console.log('Is rect an instance of Rectangle?', rect instanceof Rectangle);// true
+    console.log('Is rect an instance of Shape?', rect instanceof Shape);// true
+    rect.move(1, 1); // Outputs, 'Shape moved.'
+
+ /*   Function.prototype.construct = function(aArgs) {
+        var fConstructor = this, fNewConstr = function() {
+            fConstructor.apply(this, aArgs);
+        };
+        fNewConstr.prototype = fConstructor.prototype;
+        return new fNewConstr();
+    };
+    function MyConstructor() {
+        for (var nProp = 0; nProp < arguments.length; nProp++) {
+            this['property' + nProp] = arguments[nProp];
+        }
+    }
+
+    var myArray = [4, 'Hello world!', false];
+    var myInstance = MyConstructor.construct(myArray);
+
+    console.log(myInstance.property1);                // logs 'Hello world!'
+    console.log(myInstance instanceof MyConstructor); // logs 'true'
+    console.log(myInstance.constructor)*/
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var currying = function (fn) {
+        var args = [];
+        return function () {
+            if (arguments.length === 0){
+             return fn.apply(this, args);
+            }else {
+                console.log(arguments);
+                [].push.apply(args, arguments);
+            }
+        }
+    };
+    var cost = (function () {
+        var money = 0;
+        return function () {
+            for (var i=0,l=arguments.length; i<l; i++){
+                money+=arguments[i];
+            }
+            return money;
+        };
+
+    })();
+   cost =  currying(cost);
+    cost(100, 400, 500);
+    cost(200);
+    console.log(cost());
+    cost(500);
+    console.log(cost());
+</script>
+</body>
+</html>

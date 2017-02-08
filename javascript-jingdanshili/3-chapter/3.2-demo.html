@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function fat(n) {
+        console.log(n);
+        return n == 1 ? 1 : n * fat(n - 1);
+    }
+    function bBlock(n, callback) {
+        setTimeout(function () {
+            var val = fat(n);
+            if (callback && typeof callback == 'function') {
+                callback(val);
+            }
+        }, 0)
+    }
+    console.log('aaaaaaaaaaaaaaaaa');
+    bBlock(3,function (n) {
+        console.log('first call ends width' + n);
+        bBlock(n, function (m) {
+            console.log('first call ends width' + m);
+        })
+    })
+</script>
+</body>
+</html>

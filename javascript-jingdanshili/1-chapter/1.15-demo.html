@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #ele {
+            width: 600px;
+            height: 400px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<div id="ele">
+    <svg width="100%" height="100%">
+        <circle  id="cir" fill="red" />
+    </svg>
+</div>
+
+
+<script>
+    window.onload = window.onresize = function () {
+        var box = document.getElementById('ele'),
+            style = window.getComputedStyle(box, null),
+            height = parseInt(style.getPropertyValue('height')),
+            width = parseInt(style.getPropertyValue('width')),
+            y = height/2,
+            x = width/2,
+            circleRadius = (Math.min(width, height))/2,
+            cir = document.getElementById('cir');
+        console.log(height);
+        cir.setAttribute('r', circleRadius);
+        cir.setAttribute('cx', x);
+        cir.setAttribute('cy', y);
+
+
+    }
+</script>
+</body>
+</html>

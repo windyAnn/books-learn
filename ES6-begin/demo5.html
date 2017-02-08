@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function f() {
+        console.log('aaa');
+    }
+
+    let [x = f()] = [1];
+    console.log(x);
+
+    let y;
+    if ([1][0] === undefined) {
+        y = f();
+    } else {
+        y = [1][0];
+    }
+    console.log(y);
+    let { foo: foo, bar: bar } = { foo: "aaa", bar: "bbb" };
+    console.log(foo);
+</script>
+</body>
+</html>

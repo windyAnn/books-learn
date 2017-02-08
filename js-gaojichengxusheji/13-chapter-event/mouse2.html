@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    (function () {
+        var EventUtil = {
+            addHandler: function (element, type, handler) {
+                if (element.addEventListener) {
+                    element.addEventListener(type, handler, false);
+                } else if (element.attachEvent) {
+                    element.attachEvent('on' + type, handler);
+                } else {
+                    element['on' + type] = handler;
+                }
+            },
+            getEvent: function (event) {
+                return event ? event : window.event;
+            },
+            stopPropagation: function (event) {
+                event = event || window.event;
+                if (event.stopPropagation) {
+                    event.stopPropagation();
+                } else {
+                    event.cancelBubble = true;
+                }
+            }
+        };
+
+        function handleMouseWheel(event) {
+            EventUtil.stopPropagation(event);
+            event = EventUtil.getEvent(event);
+            var value = event.wheelDelta || -event.detail;
+            var delta = Math.max(-1, Math.min(1, value));
+            console.log(delta < 0 ? 'down' : 'up');
+
+        }
+
+        EventUtil.addHandler(document, 'mousewheel', handleMouseWheel);
+        EventUtil.addHandler(document, 'DOMMouseScroll', handleMouseWheel);
+    })();
+</script>
+</body>
+</html>

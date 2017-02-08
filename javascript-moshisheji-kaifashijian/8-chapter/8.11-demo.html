@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var Event = (function () {
+        var global = this,
+            Event,
+            _default = 'default',
+            _shift = Array.prototype.shift,
+            _unshift = Array.prototype.unshift,
+            namespaceCache = {};
+        Event = function () {
+            var _each = function (ary, fn) {
+                var ret;
+                for (var i = 0; i < ary.length; i++) {
+                    var n = ary[i];
+                    ret = fn.call(n, i, n);
+                }
+                return ret;
+            };
+            var _listen = function (key, fn, cache) {
+                if (!cache[key]) {
+                    cache[key] = [];
+                }
+                cache[key].push(fn);
+            };
+            var _remove = function (key, cache, fn) {
+                if (cache[key]) {
+                    if (fn) {
+                        for (var l = cache[key].length - 1; l >= 0; l--) {
+                            if (cache[key][l] === fn) {
+                                cache[key].splice(l, 1);
+                            }
+                        }
+                    }
+                }
+            };
+            var _trigger = function () {
+                console.log(arguments);
+                var cache = _shift.call(arguments),  //第一个参数
+                    key = _shift.call(arguments),    //第二个参数
+                    _self = this,
+                    args = arguments,
+                    ret,
+                    stack = cache[key];
+                if (!stack || !stack.length) {
+                    return ;
+                }
+                return _each(stack, function () {
+                    return this.apply(_self, args);
+                });
+            };
+            var _create = function (namespace) {
+                var namespace = namespace || _default;
+                var cache = {},
+                    offlineStack = [],
+                    ret = {
+                        listen: function (key, fn, last) {
+                            _listen(key, fn, cache);
+                            if (offlineStack == null){
+                                return false;
+                            }
+                            if (last === 'last'){
+                                offlineStack.length && offlineStack.pop()();
+                                //offlineStack.pop():删掉数组的最后一个，再返回一个新的数组，为什么数组能被调用呢？？？
+                            }else {
+                                _each(offlineStack, function () {
+                                    this();  //如上疑问
+                                });
+                            }
+                            offlineStack = null;
+                        },
+                        one: function (key, fn, last) {
+                            _remove(key, fn);
+                            this.listen(key, fn, last);
+                        },
+                        remove: function (key, fn) {
+                            _remove(key,cache, fn);
+                        },
+                        trigger: function () {
+                            var fn,
+                                args,
+                                _self = this;
+                            _unshift.call(arguments, cache);
+                            args = arguments;
+                            fn = function () {
+                                return _trigger.apply(_self, args);
+                            };
+
+                            if (offlineStack ){
+                                 return offlineStack.push(fn)
+                            }
+                            return fn();
+                        }
+                    };
+                return namespace ?
+                    (namespaceCache[namespace] ? namespaceCache[namespace] : namespaceCache[namespace] = ret)
+                    :ret ;
+            };
+            return {
+                create: _create,
+                one: function (key, fn, last) {
+                    var event = this.create();
+                    event.one(key, fn, last);
+                },
+                remove: function (key, fn) {
+                    var event = this.create();
+                    event.remove(key, fn);
+                },
+                listen: function (key, fn, last) {
+                    var event = this.create();
+                    event.listen(key, fn, last);
+                },
+                trigger: function () {
+                    var event = this.create();
+                    event.trigger.apply(this, arguments);
+                }
+            }
+        }();
+
+            return Event;
+    })();
+
+
+    Event.listen('square88', function (price) {
+        console.log(price);
+    });
+    Event.trigger('square88', 90000);
+    Event.trigger('square99', 900000);
+    Event.trigger('click', 1);
+    Event.listen('click', function (a) {
+        console.log(a);
+    })
+</script>
+</body>
+</html>

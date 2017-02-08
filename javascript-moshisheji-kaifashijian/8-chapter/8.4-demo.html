@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var  salesOffices = {};
+    salesOffices.clientList = [];
+    salesOffices.listen = function (fn) {
+        this.clientList.push(fn);
+    };
+    salesOffices.trigger = function () {
+        for (var i = 0, fn; i < this.clientList.length; i++){
+            fn = this.clientList[i];
+            fn.apply(this, arguments);
+        }
+    };
+    salesOffices.listen(function (price, square) {
+        console.log("price" + price);
+        console.log("square" + square);
+    });
+    salesOffices.trigger(20000, 200);
+</script>
+</body>
+</html>

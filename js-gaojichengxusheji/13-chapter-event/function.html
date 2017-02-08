@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  /*  function Person() {
+        this.name = function () {
+            this;
+        };
+    }
+    var person1 = new Person();
+    assert(person1.name() === person1, "aaa");
+    */
+  var outerValue = 'ninja';
+  var later;
+  function outerFunction(){
+      var innerValue = 'samurai';
+      function innerFunction(){
+          debugger;
+          console.assert(outerValue,"I can see the ninja.");
+          console.assert(innerValue,"I can see the samurai.");
+      }
+      later = innerFunction;
+  }
+  outerFunction();
+  later();
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function getSingle(fn) {
+        var ret;
+        return function () {
+            alert(this);
+            return ret||(ret = fn.apply(this, arguments));
+        };
+
+    }
+    var getScript = getSingle(function () {
+        return document.createElement("script");
+    });
+    var script1 = getScript();
+    var script2 = getScript();
+    alert(script1===script2);
+    console.log(script1);
+</script>
+</body>
+</html>

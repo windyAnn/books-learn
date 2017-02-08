@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    /*
+    //数组的方法：
+    //  1.push（）：向后添加
+    //2.pop（）：向后删除
+    //3.shift：向前删除
+    //4:unshift: 向前添加
+    var colors = [ "blue"];
+    var count = colors.push("red", "green");
+    alert(count);  //3,相当于表示该数组的长度吗
+    alert(colors);  //"red", "green","blue"
+    count = colors.push("black");
+    alert(count);//4
+
+    var item = colors.pop();
+    alert(item);    //black
+    alert(colors.length);//3
+    */
+/*
+    var values = [1, 3 , 2 , 8 ];
+    values.reverse();
+    alert(values);  //8， 2， 3， 1
+    */
+
+
+/*  sort（）方法：
+   // var values = [1, 3 , 2 , 8 , 15, 10];
+   // values.sort();//从小到大排列
+    //alert(values);
+    var values = [1, 3 , 2 , 8 , 15, 10];
+    function compare(v1, v2) {
+        if (v1 < v2){
+            return -1;
+        }else if (v1 > v2){
+            return 1;
+        }else {
+            return 0;
+        }
+    }
+    values.sort(compare);
+    alert(values);//1，2，3，......
+
+
+
+    var values2 = [1, 3 , 2 , 8 , 15, 10];
+    values2.sort(function (a, b) {
+        return b-a;  //b-a,表示按从大到小排列
+    });
+    alert(values2);// 15，10.......
+    */
+
+/*
+//concat方法
+    var colors = ["red" , "green"];
+    var colors1 = colors.concat("yellow", ["black", "brown"]);  //concat不会改变原来数组的值，而是在
+                                                    //原来数组的基础上添加值，建立一个新数组
+    alert(colors);  //red,green
+    alert(colors1);//red,green,yellow,black,brown
+    */
+/*
+//slice方法
+    var colors = ["red" , "green" , "yellow" , "black"];
+    var colors2 = colors.slice(0);
+    alert(colors2);  //red,green,yellow,black
+    var colors3 = colors.slice(1);
+    var colors4 = colors.slice(1, 3);
+    var colors5 = colors.slice(-2, -1);
+    alert(colors3);  //green,yellow,black
+    alert(colors4);//green,yellow
+
+    alert(colors5);//yellow
+    */
+/*
+//splice方法
+    //删除：
+    var colors = ["red", "green", "blue"];
+    var removed = colors.splice(0,1);  //删除第一项
+    alert(colors);  //green,blue
+    alert(removed);   //red
+
+    //插入：
+    removed1 = colors.splice(1, 0, "yellow", "orange");
+    //splice(1, 0, "yellow", "orange")1:表示起始位置，  0：要删除的项数，  后面表示要插入的项。
+    alert(colors);//（colors）：  green,yellow,orange,blue
+    alert(removed1); //""空数组
+    removed2 = colors.splice(0, 1, "yellow", "orange");  //（colors）：yellow,orange,blue
+    alert(colors);//yellow,orange,yellow,orange,blue
+    alert(removed2);
+    //替换：
+    removed3 = colors.splice(2, 1, "yellow", "orange");//yellow,orange,yellow,orange
+    alert(colors);  //yellow,orange,yellow,orange,orange,blue
+
+*/
+/*
+//indexOf  和   lastIndexOf：
+    var n = [1,2,3,4,5,4,3,2,1];
+    alert(n.indexOf(4));  //3   //在n里查找4这个数
+    alert(n.lastIndexOf(4));   //5
+    alert(n.indexOf(4, 4));     //5,,,第二个参数表示从第几个开始找。
+    alert(n.lastIndexOf(4, 4));//3
+    var person = {name: "aa"};
+    var people = [{name: "aa"}];
+    var moreP = [person];
+    alert(people.indexOf(person)); //-1  这里怎么理解？？？？，虽然对象的值是一样的，但并不代表是一个对象
+    alert(moreP.indexOf(person));//0
+
+ */
+/*
+//every方法：
+    var n = [1,2,3,4,5,6];
+    var everyR = n.every(function (t, n, arr) {
+        return t>2;  //数组的每一项是否都大于2
+    });
+    alert(everyR);//false
+
+    //some方法：
+    var someR = n.some(function (t, n, arr) {
+        return t>2;
+    });
+    alert(someR);  //true
+    //filter方法：
+    var filterR = n.filter(function (t, n, arr) {
+        return t>2;
+    });
+    alert(filterR);//3,4,5,6
+
+    //map方法
+    var mapR = n.map(function (t, n, arr) {
+        return t*2;
+    });
+    alert(mapR);  //每个数乘以2
+    //forEach方法：
+    n.forEach(function (t, n, arr) {
+      //  return t+3;
+    });
+    //alert(everyR);
+    */
+/*
+//forEach方法：
+    function logArrayElements(element, index, array) {//这个array这个参数传进来做什么呢？
+        console.log('a[' + index + '] = ' + element);
+    }
+    // Notice that index 2 is skipped since there is no item at
+    // that position in the array.
+    [2, 5,  9].forEach(logArrayElements);
+    // a[0] = 2
+    // a[1] = 5
+    // a[3] = 9
+    */
+
+    //reduce方法，遍历数组，
+    var values = [1,2,3,4,5];
+    var sum = values.reduce(function (pre,cur) {
+        return pre + cur;
+    });
+    alert(sum);  //15
+    // reduceRight方法
+    var sum2 = values.reduceRight(function (pre,cur) {
+        return pre + cur;
+    });
+    alert(sum2);//15
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

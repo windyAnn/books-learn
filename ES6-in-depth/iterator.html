@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var $it = Iterable[Symbol.iterator]();
+    var $re = $it.next();
+    while (!$it.done){
+        var  c = $re.value;
+        $re = $it.next();
+        console.log(c);
+        $it.done = 'aa';
+    }
+</script>
+</body>
+</html>

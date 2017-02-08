@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+    /*
+    //作为对象的方法调用
+    var obj = {
+        a: 1,
+        getA: function () {
+            alert(this === obj);  //true
+            alert(this.a); //1
+        }
+    };
+    obj.getA()
+    */
+    /*
+    var getId = function (id) {
+        return document.getElementById(id)
+    };
+    var getT = getId;
+    alert(getT("div1"));
+    */
+    /*
+    document.getElementById = (function (func) {
+        return function () {
+            return func.apply(document, arguments);
+        }
+    })(document.getElementById);
+    var getId = document.getElementById;
+    var div1= getId("div1");
+    alert(div1);
+    */
+    /*
+    Function.prototype.bind = function () {
+     var self = this,
+             cont = [].shift.call(arguments),
+             args = [].slice.call(arguments);
+        return function () {
+            return self.apply(cont, [].concat.call(args, [].slice.call(arguments)));
+        }
+    };
+    var obj = {
+        name: "aa"
+    };
+    var func = function (a, b, c, d) {
+        alert(this.name);
+        alert([a, b, c, d]);
+    }.bind(obj, 1, 2);
+    func(3,4);
+    */
+    (function () {
+       Array.prototype.push.call(arguments, 4);
+        console.log(arguments);
+    })(1,2)
+</script>
+</body>
+</html>

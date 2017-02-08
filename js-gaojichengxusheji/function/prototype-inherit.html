@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    /*
+     function SuperT() {
+     this.pro = true;
+     }
+     SuperT.prototype.getSuperV = function () {
+     return this.pro;
+     };
+     function SubT() {
+     this.subPro = false;
+     }
+     SubT.prototype = new SuperT();//new SuperT()就继承了所有的SuperT所拥有的属性及方法
+     SubT.prototype.getSubV = function () {
+     return  this.subPro;
+     };
+     var subT = new SubT();
+     alert(subT.getSuperV());//true
+     alert(subT.getSubV());//false
+     alert(subT instanceof SubT);//true
+     alert(subT instanceof SuperT);//true
+     alert(subT instanceof Object);//true
+     alert(Object.prototype.isPrototypeOf(subT));//true
+     alert(SuperT.prototype.isPrototypeOf(subT));//true
+     alert(SubT.prototype.isPrototypeOf(subT));//true
+     */
+/*
+    function SuperT() {
+        this.pro = true;
+    }
+    SuperT.prototype.getSuperV = function () {
+        return this.pro;
+    };
+    function SubT() {
+        this.subPro = false;
+        this.superT = new SuperT();
+    }
+  //  SubT.prototype = new SuperT();//new SuperT()就继承了所有的SuperT所拥有的属性及方法
+    SubT.prototype = {
+
+        getSubV: function () {
+            return this.subPro;
+        },
+        someOther: function () {
+            return false;
+        }
+    };
+    var subT = new SubT();
+    alert(subT.superT.getSuperV());//true
+    */
+/*
+    function SuperT() {
+        this.colors = ["aa", "nn"];
+    }
+    function SubT() {
+
+    }
+    SubT.prototype = new SuperT();
+    var subT1 = new SubT();
+    subT1.colors.push("cc");
+    alert(subT1.colors);  //aa,nn,cc
+    var subT2 = new SubT();
+    alert(subT2.colors);//aa,nn,cc
+    */
+/*
+    function SuperT() {
+        this.colors = ["aa","nn"];
+    }
+    function SubT() {
+      //  继承了SuperT,同样还可以传递参数  这样写了以后也不需要new了
+        SuperT.call(this);
+    }
+    var subT1 = new SubT();
+    subT1.colors.push("bb");
+    alert(subT1.colors); //aa,nn,cc
+    var subT2 = new SubT();
+    alert(subT2.colors);//aa,nn
+    */
+/*
+    function SuperT(name) {
+        this.name = name;
+    }
+    function SubT() {
+        //  继承了SuperT,同样还可以传递参数  这样写了以后也不需要new了
+        SuperT.call(this, "aa");
+        this.name = "nn";
+    }
+    var subT = new SubT();
+    alert(subT.name);  //nn
+    */
+/*    */
+
+ /*   function object(o) {
+        function F() {
+        }
+        F.prototype = o;
+        return new F();
+    }
+    var person = {
+        name:  "aa",
+        friends: ["aa", "bb", "cc"]
+    };
+
+
+    var anotherPerson = object(person);
+    anotherPerson.name = "Grek";
+    anotherPerson.friends.push("cc");
+    var yetAnotherP = object(person);
+    yetAnotherP.name = "nn";
+    yetAnotherP.friends.push("xx");
+    alert(person.friends);//aa,bb,cc,cc,xx
+    alert(person.name);//aa
+    *//*
+    var person = {
+        name:  "aa",
+        friends: ["aa", "bb", "cc"]
+    };
+    var anotherP = Object.create(person);
+    anotherP.name = "cc";
+    anotherP.friends.push("nn");
+    alert(person.friends);//aa,bb,cc,nn
+    */
+    /*
+   //Object.create(),如果传入两个参数，就相当于继承和扩张一个对象的属性和方法
+    var person = {
+        name:  "aa",
+        friends: ["aa", "bb", "cc"]
+    };
+    var anotherP = Object.create(person, {
+        name: {value: "xx"}
+    });
+    alert(person.friends);//aa,bb,cc
+    alert(anotherP.name);//xx  改写
+    alert(anotherP.friends);//aa,bb,cc  继承
+    */
+    /*
+   //这里是有问题的。。。。。。
+    function object() {
+    }
+    function createAnother(original) {
+        var clone = object(original);
+        clone.sayHi = function () {
+            alert("hi" );
+        };
+        return clone;
+    }
+    var person = {
+        name: "aa",
+        friends: ["bb", "cc", "dd"]
+    };
+    var anotherPerson = createAnother(person);
+    anotherPerson.sayHi();
+    */
+//这个好难理解啊   //目的是什么呢？？  为什么要这样写呢
+    function object(superT) {
+        return new superT();
+    }
+    function inheritPro(subType, superType) {
+        var proto = object(superType);  // proto = new SuperType;
+        proto.constructor = subType;   //proto.constructor = SubType;
+        subType.prototype = proto;    //SuperType.prototype = proto =  new SuperType;
+    }
+    function SuperType(name) {
+        this.name = name;
+        this.colors = ["aa", "bb", "cc"]
+    }
+    SuperType.prototype.sayName = function () {
+        alert(this.name);
+    };
+    function SubType(name, age) {
+        SuperType.call(this, name);// new SuperType  //this.name; colors; sayName
+        this.age = age;
+    }
+    inheritPro(SubType, SuperType);
+    SubType.prototype.sayAge = function () {
+        alert(this.age);
+    };
+    var subType = new SubType("xx", 36);
+    alert(subType.sayAge());
+    alert(subType.sayName());
+</script>
+</body>
+</html>

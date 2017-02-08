@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var event = {
+        clientList: [],
+        listen: function (key, fn) {
+            if (!this.clientList[key]){
+                this.clientList[key] = [];
+            }
+            this.clientList[key].push(fn);
+        },
+        trigger: function () {
+            var key = Array.prototype.shift.call(arguments);
+            var fns = this.clientList[key];
+            if (!fns || fns.length === 0){
+                return false;
+            }
+            for (var i = 0, fn; fn = fns[i++];){
+                fn.apply(this, arguments);
+            }
+        },
+        //取消订阅信息
+        remove: function (key, fn) {
+            var fns = this.clientList[key];
+            if (!fns){
+                return false;
+            }
+            if (!fn){
+                fns && (fns.length = 0);
+            }else {
+                for (var l = fns.length-1; l >= 0; l--){
+                    var _fn = fns[l];
+                    if (_fn === fn){
+                        fns.splice(l, 1);
+                    }
+                }
+            }
+        }
+    };
+    var installEvent = function (obj) {   //obj表示哪个对象需要这些函数  就可以调用installEvent然后把对象穿进去
+        for (var i in event){
+            obj[i] = event[i];
+        }
+    };
+    var saleOffice = {};
+    installEvent(saleOffice);
+    var fn1 = function (price) {
+        console.log(price);
+    };
+    var fn2 = function (price) {
+        console.log(price + "2222");
+    };
+    saleOffice.listen("square88", fn1);
+    saleOffice.listen("square88", fn2);
+    saleOffice.remove("square88", fn2);
+    saleOffice.trigger("square88", 50000);
+
+
+
+</script>
+</body>
+</html>

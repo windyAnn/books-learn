@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input>
+<input>
+<div>
+
+</div>
+<ul>
+    <li>aa</li>
+    <li>bb</li>
+    <li>cc</li>
+</ul>
+<script>
+/*
+    //ie中没有node，那。。更高版本的呢？没什么资料显示啊
+    var someNode = document.getElementsByTagName("html")[0];  //不能是多个  要这样表达某个节点
+    var arrayOfNodes = Array.prototype.slice.call(someNode.childNodes, 0);
+    alert(arrayOfNodes);//弹出body啊  等子节点
+    //[object HTMLHeadElement],[object Text],[object HTMLBodyElement]
+    alert(typeof  arrayOfNodes);  //object
+    */
+/*
+function convertToArray(nodes) {
+    var array = null;
+    try {
+        array = Array.prototype.slice.call(nodes);
+    }catch (ex){
+        array = new Array();
+        for (var i=0; i<nodes.length; i++){
+            array.push(nodes[i]);
+        }
+    }
+    return array;
+}
+var nodes = {
+    0: {name: "aa"},
+    1:{age: 11},
+    length: 2
+};
+alert(convertToArray(nodes));
+*/
+/*
+function convertToArray(nodes) {
+    var array = null;
+    try {
+        array = Array.prototype.slice.call(nodes, 0);  //这个0还是不太清楚是啥
+    }catch (ex){
+        array = new Array();
+        for (var i=0; i<nodes.length; i++){
+            array.push(nodes[i]);
+        }
+    }
+    return array;
+}
+var nodes = document.getElementsByTagName("input");
+console.log(convertToArray(nodes));
+/*先放这*/
+/*
+//append,appendTo, appendChild
+    var div = document.getElementsByTagName("div")[0];
+
+    var mm = document.createElement("div");
+   div.appendChild(mm);//这里可以加进去
+
+   // mm.appendChild("aa");//报错
+    mm.append("aa");//可以加进去的
+    */
+//
+var ul = document.getElementsByTagName("ul")[0];
+    var deepUl = ul.cloneNode(true);//如果是false就不会克隆子节点
+    alert(deepUl.childNodes.length);
+    document.getElementsByTagName("body")[0].append(deepUl);//赋值并添加进去了
+
+
+
+</script>
+</body>
+</html>

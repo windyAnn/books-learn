@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="btn" id="btn">
+<script>
+    var getSingle = function (fn) {  //管理的作用，也就是看有没有创建div
+        var result;
+        return function () {
+            return result||(result=fn.apply(this, arguments));
+        };
+    };
+    var bindEvent = getSingle(function () {
+        /*bindEvent = function () {
+         return result||(result=fn.apply(this, arguments));
+         };*/
+       document.getElementById('btn').onclick = function () {
+           alert('click');
+       } ;
+       return true;
+    });
+    var render = function () {
+        console.log("开始渲染");
+        bindEvent();
+        /*
+         result = true;
+         暴露出document.getElementById('btn').onclick = function () {
+         alert('click');
+        */
+    };
+    render();
+    //
+</script>
+</body>
+</html>

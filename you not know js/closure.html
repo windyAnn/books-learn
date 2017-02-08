@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  /*  function foo1() {
+        var a= 5;
+        function bar() {
+            a = 6;
+        }
+        bar();
+        alert(a);  //a = 6;
+    }
+    foo1();
+
+  var a = 5;
+    function foo2() {
+        a = 10;
+        function bar2() {
+            a=11;
+            console.log(a);//内部的就往上找，找到就收手
+        }
+        bar2();
+    }
+    foo2();
+    alert(a);  // a = 11
+
+*/
+  var k = 0;
+    function foo3(c) {
+        var a= 5*c;
+        if (true) {
+            let w = 4;
+        }
+        function bar() {
+            a = 6;
+            console.log(w);
+        }
+        bar();
+     //   alert(a);  //a = 6;
+        return a;
+    }
+
+
+    function  foo4() {
+
+    }
+  foo3(3);
+</script>
+</body>
+</html>

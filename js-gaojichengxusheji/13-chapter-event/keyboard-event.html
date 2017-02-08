@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<ul id="myList">
+    <li>11</li>
+    <li>aa</li>
+    <li>ss</li>
+    <li>dd</li>
+    <li>ss</li>
+</ul>
+<textarea id="myText"></textarea>
+<script src="event-merge-function.js"></script>
+<script>
+    var textbox = document.querySelector("#myText");
+   /* EventUtil.addHandler(textbox, "keyup", function (e) {
+        var event = EventUtil.getEvent(e);
+        alert(event.keyCode);
+    })
+    EventUtil.addHandler(textbox, "textInput", function (e) {
+        var event = EventUtil.getEvent(e);
+        alert(event.data);
+    })*/
+
+   EventUtil.addHandler(window, "load", function (e) {
+       var ul = document.querySelector("#myList");
+       EventUtil.addHandler(document, "DOMSubtreeModified", function (e) {
+           alert(e.type);
+           alert(e.target);
+       });
+       EventUtil.addHandler(document, "DOMNodeRemoved", function (e) {
+           alert(e.type);
+           alert(e.target);
+           alert(e.relatedNode);
+       });
+       EventUtil.addHandler(document, "DOMNodeRemovedFromDocument", function (e) {
+           alert(e.type);
+           alert(e.target);
+
+       });
+
+       ul.parentNode.removeChild(ul);
+   })
+</script>
+</body>
+</html>

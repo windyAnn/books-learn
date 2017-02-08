@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var Event = function () {
+
+        var cache = [];   //把监听到的事件都放在这里   全局
+        var offlineCache = [];
+        var listen = function (key, fn) {
+            if (!cache[key]){
+                cache[key] = [];
+            }
+            if (key in offlineCache){
+                fn.call(this, offlineCache[key]);
+                offlineCache = null;
+            }
+            cache[key].push(fn);
+        };
+        var trigger = function () {   //触发fn事件
+            var key = Array.prototype.shift.call(arguments);  //获得监听到的key
+            var fns = cache[key];
+            //如果这个key是先发布呢的呢？
+            if (!cache[key]){
+                offlineCache[key] = arguments;
+                //要把arguments传进listen 里的fn中
+            }
+            //ba监听的事件处理一下
+            if (fns){
+                for (var i = 0; i < fns.length; i++){
+                    fns[i].apply(this, arguments);
+                }
+            }
+        };
+        return {
+            listen: listen,
+            trigger: trigger
+        }
+    }();
+
+    Event.trigger("click", 2);
+    Event.listen("click", function (a) {
+        console.log(a);
+    })
+</script>
+</body>
+</html>

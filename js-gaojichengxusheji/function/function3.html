@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    function outPutN(count) {
+        for (var i=0; i<1; i++){
+            alert(i);
+        }
+        i = 10;
+        var i =2 ;
+        alert(i);
+    }
+    outPutN();
+*/
+    function MyObject() {
+        var privateV = 10;
+        function privateF() {
+            return false;
+        }
+        this.publicMethod = function () {
+            privateV++;
+            alert(privateV);
+            return privateF();
+        };
+    }
+    var myObj = new MyObject();
+    alert(myObj.publicMethod());
+
+</script>
+</body>
+</html>

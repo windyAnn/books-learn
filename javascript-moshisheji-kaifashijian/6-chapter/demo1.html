@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var myImage = (function () {
+        var imgNode = document.createElement('img');
+        document.body.appendChild(imgNode);
+        return {
+            setSrc: function (src) {
+                imgNode.src = src;
+            }
+        };
+    })();
+    var proxyImg = (function () {
+        var img = new Image();
+        img.onload = function () {
+            myImage.setSrc(this.src);
+        };
+        return {
+            setSrc: function (src) {
+                myImage.setSrc('1.jpg') ;
+                img.src = src;
+            }
+        };
+    })();
+    proxyImg.setSrc('http://pic.nipic.com/2007-12-13/2007121311204642_2.jpg');
+</script>
+</body>
+</html>

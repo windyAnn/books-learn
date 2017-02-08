@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="replay">播放录音</button>
+<script>
+//有误的写法。。。。。
+    var attack = {
+            execute: function () {
+                console.log('攻击');
+            }
+        },
+        defense = {
+            execute: function () {
+                console.log('防御');
+            }
+        },
+        jump = {
+            execute: function () {
+                console.log('跳跃');
+            }
+        },
+        crouch = {
+            execute: function () {
+                console.log('蹲下');
+            }
+        };
+    var MacroCommand = function () {
+        return {
+            commandList: [],
+            add: function (command) {
+                this.commandList.push(command);
+            },
+            execute: function () {
+                for (var i = 0;i < this.commandList.length; i++){
+                    this.commandList[i].execute();
+                }
+            }
+        }
+    };
+    var commands = {
+        '119': 'jump',
+        '115': 'crouch',
+        '97': 'defense',
+        '100': 'attack'
+    };
+
+
+    var makeCommand = function (receiver, state) {
+        return function () {
+            receiver[state]();
+        };
+    };
+
+    var commandStack = [];
+    document.onkeypress = function (e) {
+        var keyCode = e.keyCode,
+            macroCommand = MacroCommand(),
+            command = macroCommand.add(commands[keyCode]);  //这里执行完后就是一个字符串啊
+        console.log(keyCode);
+        if (command) {
+            command();
+            commandStack.push(command);
+        }
+    };
+    document.getElementById('replay').onclick = function () {
+        var command;
+        while (command = commandStack.shift()) {
+            command();
+        }
+    }
+</script>
+</body>
+</html>

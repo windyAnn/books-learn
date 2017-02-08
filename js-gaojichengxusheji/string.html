@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <video tabindex="-1" class="video-stream html5-main-video" style="width: 854px; height: 480px; left: 0px; top: 0px; opacity: 1;" src="blob:https://www.youtube.com/271a0190-a9f3-4a4d-993e-d9a9e9b874b1"></video>
+</div>
+<div>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/t76s_Fz7cDA" frameborder="0" allowfullscreen></iframe>
+</div>
+<div>
+    <embed src="http://player.youku.com/player.php/Type/Folder/Fid/4152375/Ob/1/Pt/0/sid/XMTQ5MDk0NzI4/v.swf" quality="high" width="480" height="400" align="middle" allowScriptAccess="allways" mode="transparent" type="application/x-shockwave-flash"></embed搜索>
+</div>
+<script>
+    /*
+    //字符方法
+    //charAt 和charCodeAt接收一个参数
+    var str = "hello world";
+    alert(str.charAt(1));//e
+    alert(str.charCodeAt(1));//101
+    alert(str[1]);      //e IE7以下不支持
+    */
+    //字符串操作方法
+    //concat方法
+    /*
+    var str = "hello";
+    var result = str.concat(" world");
+    alert(result);  //hello world   表示字符串向后添加字符串
+    alert(str);     //hello
+    var result1 = str.concat(" world" , " !");
+    alert(result1);//hello world !
+    var result2 = str + " nihao";
+    alert(result2);   //hello nihao
+    */
+    /*
+    //字符串操作方法
+    //slice，substr， substring
+    var str = "hello world";
+    alert(str.slice(3)); //lo world
+    alert(str.slice(3, 7));//lo w
+    alert(str.substring(3));//lo world
+    alert(str.substring(3, 7));//lo w
+    alert(str.substr(3)); //lo world
+    alert(str.substr(3, 7));//lo worl  从第三位起，取7个数
+    */
+/*
+    //字符串操作方法
+    //indexOf 和lastIndexOf
+    var str = "hello world";
+    alert(str.indexOf("l"));//2
+    alert(str.lastIndexOf("l"));  //9
+    //如果传入第二个参数，则表示从第几个位置开始查找
+    alert(str.indexOf("l", 5)); //6
+    alert(str.lastIndexOf("o", 6));//4,这个6 是从后面数起的
+    */
+/*
+var str = "abcd efg hig k abc abc d abc";
+    var positions = [];
+    var pos = str.indexOf("c");
+    while (pos != -1){
+        positions.push(pos);
+        pos = str.indexOf("c", pos + 1);   //从pos+1的位置开始继续找
+    }
+    alert(positions);
+    */
+/*
+//trim（）方法
+    var str = "  hello world  ";
+    var trimStringV = str.trim();  //去掉空格
+    alert(trimStringV);//hello world
+    */
+
+/*
+//toLocaleUpperCase,toLowerCase方法
+    var str = "Hello world";
+    alert(str.toLocaleLowerCase());
+    alert(str.toLowerCase());
+    alert(str.toUpperCase());
+    alert(str.toLocaleUpperCase());
+*/
+/*
+//字符串匹配的方法
+    //match方法跟exec的方法是一样的结果
+
+    var text = "  cat, bat, sat, fat";
+    var pattern = /.at/;
+    var matches = text.match(pattern);
+    //exec的方法：pattern.match(text)；
+    alert(matches);  //cat
+    alert(matches.index);  //2,第2个就找到了呀
+    alert(pattern.lastIndex);  //0,,这就奇怪了，都没有指明要找的对象是谁？？？
+*/
+/*
+    var text = "  cat, bat, sat, fat";
+   // var pattern = /.at/;
+    var matches = text.match("at");
+    alert(matches);  //用字符串是不行的，要用正则表达式
+    */
+/*
+var text = "  cat, bat, sat, fat";
+    var pos = text.search(/at/);
+    alert(pos);//3
+    //search方法和match方法还是很有相同的地方的
+    */
+/*
+    var text = "  cat, bat, sat, fat";
+    var result = text.replace("at", "ond");
+    alert(result);  //  cond, bat, sat, fat   //只转化了一个
+    var result2 = text.replace(/at/g, "ond");
+    alert(result2);  // cond, bond, sond, fond  //全部被转化了
+    */
+/*
+    var text = "  cat, bat, sat, fat";
+    var pos = text.indexOf("at");
+    var res = text.replace("at", "ond");
+    while (pos != -1){
+        pos = res.indexOf("at");
+        res = res.replace("at", "ond");
+    }
+    alert(res);// cond, bond, sond, fond //全部被转化了
+*/
+var colorText = "red,blue,green,yellow";
+    var color1 = colorText.split(",");
+    console.log(color1);  //数组["red","blue","green","yellow"];
+    var color2 = colorText.split(",", 2);
+    console.log(color2);//数组["red","blue"]
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

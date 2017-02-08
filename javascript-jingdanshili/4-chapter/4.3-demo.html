@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function OrigObj() {
+        this.va1 = 'a';
+        this.va2 = 'b';
+    }
+    OrigObj.prototype.returnVa1 = function () {
+        return this.va1;
+    };
+    OrigObj.prototype.returnVa2 = function () {
+        return this.va2;
+    };
+
+    function NewObj() {
+        this.va3 = 'c';
+        OrigObj.call(this);
+    }
+    NewObj.prototype = Object.create(OrigObj.prototype);  //new OrigObj()???
+    //Object.create(proto [, propertiesObject ]) 是E5中提出的一种新的对象创建方式，
+    // 第一个参数是要继承的原型，如果不是一个子函数，可以传一个null，
+    // 第二个参数是对象的属性描述符，这个参数是可选的。
+    NewObj.prototype.constructor = NewObj;
+    NewObj.prototype.getValues = function () {
+        return this.va1 + " " + this.va2 + " " + this.va3;
+    };
+    var obj = new NewObj();
+    console.log(obj instanceof NewObj);
+    console.log(obj instanceof OrigObj);
+    console.log(obj.getValues());
+</script>
+
+</body>
+</html>

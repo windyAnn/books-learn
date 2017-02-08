@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var strategies = {
+        "S": function (salary) {
+            return salary*4;
+        },
+        "A": function (salary) {
+            return salary*3;
+        },
+        "B": function (salary) {
+            return salary*2;
+        }
+    };
+    var calculate = function ( level, salary) {
+        return strategies[level](salary);
+    };
+    alert(calculate("S", 3000));
+</script>
+</body>
+</html>

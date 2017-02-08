@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function* quips(name) {
+        yield 'nihao' + name;
+        yield 'hope you like it';
+        if (name.startsWith("X")){
+            yield 'your name' + name + 'cool for X';
+        }
+        yield 'see you next time';
+    }
+   var it = quips('jorendorIf');
+    console.log(it);
+    console.log(it.next());
+    console.log(it.next());
+    console.log(it.next());
+    console.log(it.next());
+</script>
+</body>
+</html>

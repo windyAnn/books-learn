@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    var googleMap = {
+        show: function () {
+            console.log("google");
+        }
+    };
+    var baiduMap = {
+        show: function () {
+            console.log("baidu");
+        }
+    };
+    var renderMap = function (map) {
+        if (map.show instanceof Function){  //object(要检查的对象) instanceof constructor（某个构造函数）
+            map.show();
+        }
+    };
+    renderMap(baiduMap);//baidu
+    */
+    //原型
+
+    var People = function () {
+
+    };
+    People.prototype = {
+        talk: function () {
+            alert("aa");
+        }
+    };
+    var Person = function () {
+
+    };
+    Person.prototype = new People();
+    /*new完之后只调用了 var People = function () {
+    };  */
+
+   Person.prototype.talk = function () {
+        alert("bbb");
+    };
+    var person = new Person();
+    person.talk();   //bbb，不会进去People的prototype里
+  /*
+    var People = function () {
+        this.talk=function () {
+            alert("aa");
+        }
+    };
+    People.prototype = {
+
+    };
+    var Person = function () {
+
+    };
+    Person.prototype = new People();
+    /*new完之后只调用了 var People = function () {
+     };
+
+    Person.prototype.talk = function () {
+        alert("bbb");
+    };
+    var person = new Person();
+    person.talk();   //bbb，不会进去People的prototype里
+
+    */
+</script>
+</body>
+</html>

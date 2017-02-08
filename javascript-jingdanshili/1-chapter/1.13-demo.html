@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table id="tb1">
+    <tr>
+        <td>W</td>
+        <td>145</td>
+    </tr>
+    <tr>
+        <td>O</td>
+        <td>233</td>
+    </tr>
+    <tr>
+        <td>m</td>
+        <td>833</td>
+    </tr>
+</table>
+<script>
+    var cells = document.querySelectorAll('td + td');
+    var  tb1 = document.getElementById('tb1');
+   // console.log(cells);
+   /* var cell1 = document.querySelectorAll('td');
+    console.log(cell1);*/
+   var sum = 0;
+   for (var i = 0; i < cells.length; i++){
+       sum += parseFloat(cells[i].innerHTML);
+   }
+   var newR = document.createElement('tr');
+    var newTd1 = document.createElement('td');
+    var cell1 = "sum";
+    newTd1.append(cell1);
+    newR.append(newTd1);
+    var newTd2 = document.createElement('td');
+    newTd2.append(sum);
+    newR.append(newTd2);
+    tb1.append(newR);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="myForm">
+    用户名：<input type="text" name="username">
+    密码：<input type="text" name="password">
+    手机号码：<input type="text" name="phoneNumber">
+    <button type="submit"></button>
+</form>
+<script>
+var strategies = {
+    isNonEmpty: function (value, errMsg) {
+        if (value === ''){
+            return errMsg;
+        }
+    },
+    minLength: function (value, length, errMsg) {
+        if (value.length < length){
+            return errMsg;
+        }
+    },
+    isMoble: function (value, errMsg) {
+        if (! /1\d{10}/.test(value)){
+            return errMsg;
+        }
+    }
+};
+
+var Validator = function () {
+    this.cache = [];
+};
+Validator.prototype.add = function (dom, rule, errMsg) {
+    var ary = rule.split(':');
+    this.cache.push(function () {
+        var strategy = ary.shift();
+        ary.unshift(dom.value);
+        ary.push(errMsg);
+        return strategies[strategy].apply(dom, ary);
+    });
+};
+Validator.prototype.start = function () {
+    for (var i=0, validatorFunc; validatorFunc = this.cache[i++];){
+        var msg = validatorFunc();
+        if (msg){
+            return msg;
+        }
+    }
+};
+
+var registerForm = document.getElementById('myForm');
+var validataFunc = function () {
+    var validator = new Validator();
+    validator.add(registerForm.username, 'isNonEmpty', '用户名不能为空');
+    validator.add(registerForm.password, 'minLength:6', '密码不能小于6位数');
+    validator.add(registerForm.phoneNumber, 'isMoble', '手机号码格式不正确');
+    var errMsg = validator.start();
+    return errMsg;
+};
+registerForm.onsubmit = function () {
+    var errMsg = validataFunc();
+    if (errMsg){
+        return errMsg;
+    }
+};
+
+
+</script>
+</body>
+</html>

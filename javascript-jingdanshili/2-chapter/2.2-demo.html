@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var obj = {
+        a: 1,
+        b: 2,
+       testFun: function (c, d) {
+           return this.a + this.b + c + d;
+       }
+    };
+
+    var b = {
+        a: 4,
+        b: 5
+    };
+    var kk = [1,2];
+    var c = obj.testFun.apply(b, kk);
+    console.log(c);
+
+
+
+    var oldArr = [];
+    oldArr[0] =['a','b'];
+    oldArr[1] =['c','d'];
+    var newArr = Array.prototype.concat.apply([], oldArr);
+    console.log(newArr);
+</script>
+</body>
+</html>

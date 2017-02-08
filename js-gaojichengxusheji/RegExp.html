@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    var text = "a mom and dad and baby";
+    var pattern = /mom( and dad( and baby)?)? /gi;
+    var match = pattern.exec(text);
+    alert(match.index);//2 表示pattern在text里的那个位置开始找到的。
+    alert(match.input);//"a mom and dad and baby"
+    alert(match[0]);  //mom and dad
+    alert(match[1]);  //and baby
+    alert(match[2]); //undefined
+
+    var text1 = "mom and dad and baby";
+    var pattern1 = /mom( and dad( and baby)?)? /gi;
+    var match1 = pattern1.exec(text1);
+    alert(match1[0]);  //mom and dad
+    alert(match1[1]);   //and baby
+    alert(match1[2]); //undefined
+    */
+/*
+    var text = "cat, bat, sat, fat";
+    var p = /.at/;   //.表示任何字符
+    var match = p.exec(text);
+    alert(match.index);//0
+    alert(match[0]);  //cat
+    alert(p.lastIndex);  //0
+    */
+/*
+    var text = "cat, bat, sat, fat";
+    var p = /.at/g;
+    var match = p.exec(text);
+    alert(match.index);//0
+    alert(match[0]);  //cat
+    alert(p.lastIndex);  //3,, 应该是3的
+     match = p.exec(text);
+    alert(match.index);//5
+    alert(match[0]);  //bat
+    alert(p.lastIndex);  //8
+    */
+/*
+var text = "000-00-0000";
+    var p = /\d{3}-\d{2}-\d{4}/;  //  \d:表示0-9，{3}，匹配3次的意思
+    if (p.test(text)){
+        alert("aaa");
+    }
+    */
+/*
+var text = "this has been a short summer";
+    var p = /.hort/g;
+
+    if ( p.test(text)){
+         alert(RegExp.input);  //this has been a short summer
+        alert(RegExp.leftContext); //his has been a
+        alert(RegExp.rightContext);//summer
+        alert(RegExp.lastMatch);//short
+        alert(RegExp.lastParen);//""空字符
+        alert(RegExp.multiple);//undefined
+    }
+
+    var text = "this has been a short summer";
+    var p = /(.)hort/g;
+    if ( p.test(text)){
+        alert(RegExp.input);  //this has been a short summer
+        alert(RegExp.leftContext); //his has been a
+        alert(RegExp.rightContext);//summer
+        alert(RegExp.lastMatch);//short
+        alert(RegExp.lastParen);//s
+        alert(RegExp.multiple);//undefined
+    }
+*/
+var text = "this has been a short summer";
+    var p = /(..)or(.)/g;
+    if (p.test(text)){  //test方法返回的是布尔值
+        alert(RegExp.$1);//sh
+        alert(RegExp.$2);//t
+    }
+
+
+</script>
+</body>
+</html>

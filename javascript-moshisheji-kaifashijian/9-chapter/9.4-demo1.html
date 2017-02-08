@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="animate.js"></script>
+</head>
+<body>
+<div id="ball" style="position: absolute; background: #000;width: 50px;height: 50px;left: 0;"></div>
+输入小球移动的位置<input id="pos" type="text">
+<button id="moveBtn">moveBtn</button>
+<button id="cancelBtn">cancelBtn</button>
+<script>
+    var ball = document.getElementById('ball'),
+        pos = document.getElementById('pos'),
+        moveBtn = document.getElementById('moveBtn');
+        cancelBtn = document.getElementById('cancelBtn');
+    /*  startBtn.onclick = function () {
+     var animate = new Animate(ball);
+     animate.start('left', pos.value, 100000, 'easeIn');
+     }*/
+    var initPos = ball.offsetLeft;
+
+    //命令模式
+    var MoveCommand = function (receiver, pos) {
+        this.receiver = receiver;
+        this.pos = pos;
+    };
+    MoveCommand.prototype.execute = function () {
+        this.receiver.start('left', this.pos, 100000, 'easeIn');   //animate  才有start方法
+    };
+
+
+    moveBtn.onclick = function () {
+        var animate = new Animate(ball);
+        var moveCommand = new MoveCommand(animate, pos.value);
+        moveCommand.execute();
+    };
+    var CancelCommand = function (receiver, pos) {
+        this.receiver = receiver;
+        this.pos = pos;  //其实就是这个位置  你要获取最开始没有运动时所处的位置
+    };
+    CancelCommand.prototype.execute = function () {
+        this.receiver.start('left', this.pos, 100000, 'easeIn');   //animate  才有start方法
+    };
+    cancelBtn.onclick = function () {
+        var animate = new Animate(ball);
+        var cancelCommand = new MoveCommand(animate, initPos);
+        cancelCommand.execute();
+    };
+
+
+    // var moveCommand = new MoveCommand(ball, 1000);   //这个动作是要在点击了btn之后才能执行
+</script>
+
+</body>
+</html>

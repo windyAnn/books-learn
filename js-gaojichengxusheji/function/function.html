@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    function sayHi() {
+        alert("hello" + arguments[0] + arguments[1]);
+    }
+    sayHi("a", "b");
+    */
+/*
+    function doAdd(n1, n2) {
+        arguments[1] = 10;
+        alert(arguments[0] + n2);//15   5 + 10,   20被重写了。
+    }
+    doAdd(5 , 20);
+    */
+   /*
+    function doAdd(n1, n2) {
+        arguments[1] = 10;//这个有点类似定义了变量，又没有被初始化。
+        alert(arguments[0] + n2);//NaN
+    }
+    doAdd(5 );  //如果只传入一个值，arguments[1]是不能重写的。
+    */
+/*
+   function testA(a) {
+       a = "ccccc";
+   }
+   var b = "aaaa";
+   testA(b);
+    console.log(b);
+
+    function testObj(o) {
+        o.name = "nihao";
+    }
+    var to = {
+        name: "cccc"
+    };
+    testObj(to);
+    console.log(to);
+
+ var obj1 = new Object();
+    var obj2 = obj1;   //赋值后是引用了该对象
+    obj1.name = "aa";
+    alert(obj2.name);
+
+    */
+/*
+function setName(obj) {
+    obj.name = "aa";  //obj被传进来，是一个对象（引用）
+    obj = new Object();  //obj重新被定义，是一个局部变量；
+    obj.name = "bb";
+    alert(obj.name);
+}
+var person = new Object();
+    setName(person);
+    alert(person.name);
+
+    */
+/*
+var color = "blue";
+    function changeC() {
+        if (color === "blue"){
+            color = "red";
+        }else {
+            color = "blue";
+        }
+    }
+    changeC();
+    alert(color);
+    */
+/*
+    var color = "blue";
+    function changeC(){
+        var anotherC = "red";
+        function swapC() {
+            var tempC = anotherC;
+            anotherC = color;
+            color = tempC;
+        }
+        swapC();
+    }
+    changeC();
+    alert(color);
+
+    */
+/*
+if (true){
+   var coler ="red";
+}
+alert(coler);//red,原因是if不是块级作用域。
+*/
+
+/*
+for (var i=0; i<5; i++){
+    var a = i;
+}
+alert(i);//5
+*/
+/*
+var i=0;
+    while ( i<5){
+        var a = i;
+        i++;
+    }
+    alert(a);//4
+    */
+    var i=0;
+    while ( i<5){
+        let a = i;
+        i++;
+    }
+    alert(a);//不能访问
+</script>
+</body>
+</html>

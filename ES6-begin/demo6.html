@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    const obj = {
+        toString() {
+            return 'abc';
+        }
+    };
+    const sym = Symbol(obj);
+    console.log(sym); // Symbol(abc)
+    let sym2 = Symbol('My symbol');
+
+    console.log("your symbol is " + sym2.toString());
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn1">aa</button>
+<button id="btn2">bb</button>
+<button id="btn3">cc</button>
+
+<script>
+    var btn1 = document.getElementById("btn1"),
+        btn2 = document.getElementById('btn2'),
+        btn3 = document.getElementById('btn3');
+
+    var setCommand = function (btn, fn) {
+        btn.onclick = fn;
+    };
+    var menuBar = {
+        refresh: function () {
+            console.log("menu refresh");
+        }
+    };
+    setCommand(btn1, menuBar.refresh);
+
+
+</script>
+</body>
+</html>

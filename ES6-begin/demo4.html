@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    console.log(self);
+    var getGlobal = function () {
+        if (typeof self !== 'undefined') { return self; }
+        if (typeof window !== 'undefined') { return window; }
+        if (typeof global !== 'undefined') { return global; }
+        throw new Error('unable to locate global object');
+    };
+    console.log(getGlobal());
+</script>
+</body>
+</html>

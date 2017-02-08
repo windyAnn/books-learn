@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*  既然两个结果相同  用apply的意义何在？？？？
+    Function.prototype.before = function (beforefn) {
+        var self = this;
+        return function () {
+            beforefn.apply(this, arguments);
+            return self.apply(this, arguments);
+        };
+    };
+    Function.prototype.after = function (afterfn) {
+        var self = this;
+        return function () {
+            var ret = self.apply(this, arguments);
+            afterfn.apply(this, arguments);
+            return ret;
+        };
+    };
+    var func = function () {
+        console.log(2);
+    };
+    func = func.before(function(){
+        console.log(1);
+    }).after(function(){
+        console.log(3);
+    });
+    alert(func());
+    */
+    Function.prototype.before = function (beforefn) {
+        var self = this;
+        return function () {
+            beforefn();
+            return self();
+        };
+    };
+    Function.prototype.after = function (afterfn) {
+        var self = this;
+        return function () {
+            var ret = self();
+            afterfn();
+            return ret;
+        };
+    };
+    var func = function () {
+        console.log(2);
+    };
+    func = func.before(function(){
+        console.log(1);
+    }).after(function(){
+        console.log(3);
+    });
+    alert(func());
+</script>
+</body>
+</html>

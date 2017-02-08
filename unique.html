@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    function unique(str) {
+        var arr = [];
+        var strArr=str.split("");
+      for (var i = 0; i < strArr.length; i++){
+          if (arr.indexOf(strArr[i]) == -1){
+              arr.push(strArr[i]);
+          }
+      }
+
+
+        return (arr.join()).replace(/,/g, "");
+    }
+    console.log(unique("123456123"));
+    function strReplace(str, startN, nLen, replaceVal) {
+        var newStr = '';
+      //  if (!isString(str) || !isNumber(startN) || !isNumber(nLen) || !isString(replaceVal)) return;
+        for(var i = 0; i < str.length; i++){
+            if (i < startN){
+                newStr += str[i];
+            }
+            newStr += replaceVal;
+            if (i >= startN + nLen){
+                newStr += str[i];
+            }
+        }
+        return newStr;
+    }
+    function deleRepeat(str, val) {
+     //   if (!isString(str)) return;
+        var newStr = '';
+
+            for (var i = 0; i < str.length; i++){
+                if ((!val) && str[i] == str[i+1]){
+                    newStr = str.slice(0,i) + str.slice(i + 1);
+
+                    str = newStr;
+                    i--;
+                }
+                if ((val) && str[i] == val && str[i+1] == val){
+                    newStr = str.slice(0,i) + str.slice(i + 1);
+                    str = newStr;
+                    i--;
+                }
+            }
+
+        newStr = str;
+        return newStr;
+    }
+    console.log(deleRepeat('aaabbbc', 'b'));
+</script>
+</body>
+</html>

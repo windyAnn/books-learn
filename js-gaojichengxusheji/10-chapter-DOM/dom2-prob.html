@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="div1">
+    <input type="button" id="btn" class="selected" value="按钮1">
+    <input type="button" class="selected" value="按钮2">
+</div>
+<div id="demo"></div>
+
+<script>
+    /*
+     //querySelector与jquery有些类似。与getElement。。的差别在于都是取得第一个元素
+     var myBtn = document.querySelector("#btn");
+     myBtn.onclick = function () {
+     alert("aa");
+     };
+     var selected = document.querySelector(".selected");//获取到第一个
+     selected.onclick = function () {
+     alert("bb");
+     };
+     var selected1 = document.querySelector("input.selected");
+     selected1.onclick = function () {
+     alert("cc");
+     };
+     */
+    /*
+     //如果要做到与getElement。。一样，取到所有的元素，那么就用querySelectorAll,同样用下标可以取到第几个元素
+     var  selected = document.querySelectorAll(".selected");//获取所有的selected
+     selected[1].onclick = function () {
+     alert("bb");
+     };
+     */
+    /*
+     var div1 = document.querySelector("#div1");
+     var i, len, child = div1.firstChild, n = 0;
+     console.log(child.nodeType);
+     /*  while (child != div1.lastChild){
+     n++;
+     if (child.nodeType == 1 ){
+     console.log(child);
+
+     }
+     child = div1.nextSibling;
+     }  //是一个无穷的循环*/
+    /*
+     function myFunction()
+     {
+     var txt="";
+     var c=document.body.childNodes;
+     for (var i=0; i<c.length; i++)
+     {
+     txt=txt + c[i].nodeType + "<br>";
+     console.log(c[i].nodeType);
+     //3 1 3 1 3 1   3代表文本节点， 1代表元素节点
+     }
+     var x=document.getElementById("demo");
+     x.innerHTML=txt;
+     }
+     myFunction();
+     */
+    //如果要用子元素节点，不包括文本节点
+
+    var div1 = document.querySelector("#div1");
+    var i, len, child = div1.firstElementChild, n = 0;
+    console.log(child.nodeType); //1,元素节点
+
+        if (child != div1.lastElementChild) {
+            n++;
+            console.log(child);
+            child = div1.nextElementSibling;
+        }
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var pieceOfHtml = '<p>This is s<span>sss</span></p>';
+    pieceOfHtml = pieceOfHtml.replace(/</g, '&lt;');
+    pieceOfHtml = pieceOfHtml.replace(/>/g, '&gt;');
+    console.log(pieceOfHtml);
+</script>
+</body>
+</html>

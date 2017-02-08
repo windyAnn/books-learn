@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function parcial(fn) {
+        var args = [].slice.call(arguments, 1);
+        return function () {
+            return fn.apply(this, args.concat([].slice.call(arguments)));
+        };
+    }
+    function add(a, b) {
+        return a + b;
+    }
+    var add100 = parcial(add, 100);
+    console.log(add100);
+    console.log( add100(14));
+
+    function makeString(alim, blim, str) {
+        return alim + blim + str;
+    }
+    var nameEntity = parcial(makeString, "$&", ";");
+    console.log(nameEntity(123));
+    function makeString2(alim, blim, str) {
+        var re = /^[0-9a-z]+$/g;
+        if (re.exec(str)){
+             return alim +  str + blim;
+        }else {
+            return  alim + blim + str;
+        }
+
+    }
+    var nameEntity2 = parcial(makeString2, "$&", ";");
+    console.log(nameEntity2(123));
+
+
+    function makeStr3(a, b, c) {
+        return a + b + c;
+    }
+    var name3 = makeStr3.bind(undefined, ",", ";");
+    console.log(name3('aaa'));
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var tmp = new Date();
+
+    function f() {
+        console.log(tmp);  //为什么呢？  执行顺序应该是没有错   那么久能console的呀
+        if (false) {
+            var  tmp = "hello world";
+        }
+    }
+
+    f(); // undefined
+
+    var s = 'hello';
+
+    for (var i = 0; i < s.length; i++) {
+        console.log(s[i]);
+    }
+
+    console.log(i); // 5
+
+
+    for (let i = 0; i < s.length; i++) {
+        console.log(s[i]);
+    }
+
+    console.log(i); // 5
+</script>
+</body>
+</html>

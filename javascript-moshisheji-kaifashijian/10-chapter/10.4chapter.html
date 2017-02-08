@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //宏命令
+    var MacroCommand = function () {
+        return {
+            commandList: [],
+            add: function (command) {
+                this.commandList.push(command);
+            },
+            execute: function () {
+                for (var i = 0; i < this.commandList.length; i++){
+                    this.commandList[i].execute();
+                }
+            }
+        };
+    };
+    //电视和空调的开关放在一起
+    var openAircCommand = {
+        execute: function () {
+            console.log('openAirc +aaa');
+        }
+    };
+    var openTvCommand = {
+        execute:  function () {
+            console.log('openTv +aaa');
+        }
+    };
+    var macroCommand1 = new MacroCommand();
+    macroCommand1.add(openAircCommand);
+    macroCommand1.add(openTvCommand);
+    //开门和开电脑的开关放一块
+    var openDoorCommand = {
+        execute: function () {
+            console.log('openDoor +aaa');
+        }
+    };
+    var openComputerCommand = {
+        execute:  function () {
+            console.log('openComputer +aaa');
+        }
+    };
+    var macroCommand2 = new MacroCommand();
+    macroCommand2.add(openDoorCommand);
+    macroCommand2.add(openComputerCommand);
+    //总开关
+    var  macroCommand = new MacroCommand();
+    macroCommand.add(macroCommand1);
+    macroCommand.add(macroCommand2);
+    macroCommand.execute();
+</script>
+</body>
+</html>

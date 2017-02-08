@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    Function.prototype.uncurrying = function () {
+        var self = this;
+        return function () {
+            var obj = Array.prototype.shift.call(arguments);//argumentsP,4 2个参数
+            return self.apply(obj, arguments);
+            // obj = argumentsP  arguments = 4,self = Array.prototype.push()
+        }
+    };
+
+    var call = Function.prototype.call.uncurrying();
+    var fn = function (name) {
+        console.log(name);
+    };
+    call(fn, "weee");
+</script>
+</body>
+</html>

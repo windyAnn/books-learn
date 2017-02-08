@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var sentence = 'this is one centence. one centence:' + ' aa, bb,cc,dd.' + 'this.';
+    var start = sentence.indexOf(":");
+    var end = sentence.indexOf(".", start+1);
+    var lists = sentence.substring(start+1, end);
+    var list = lists.split(/\s*,\s*/);//把字符串拆分成数组
+    console.log(list);
+</script>
+</body>
+</html>

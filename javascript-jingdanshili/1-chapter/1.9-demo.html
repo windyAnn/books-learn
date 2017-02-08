@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var dtstr = '2014-3-04T19:35:32Z';
+    dtstr = dtstr.replace(/\D/g, ' ');
+    console.log(dtstr);
+    var dtcoms = dtstr.split(' ');
+    console.log(dtcoms);
+    dtcoms[1]--;
+    console.log(dtcoms);
+    var convdt = new Date(Date.UTC.apply(null, dtcoms));
+    console.log(convdt.toString());
+
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var MyApp = {};
+    MyApp.nameSpace = function (name) {
+        var parts = name.split(".");
+        var current = MyApp;
+        for (var i in parts){
+            if (!current[parts[i]]){
+                current[parts[i]] = {};
+            }
+            current = current[parts[i]];
+        }
+        return current;
+    };
+    console.log(MyApp.nameSpace('event'));
+
+
+</script>
+</body>
+</html>

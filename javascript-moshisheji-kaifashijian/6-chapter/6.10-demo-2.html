@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var mult = function () {
+        console.log('begin');
+        var a = 1;
+        for (var i = 0, l = arguments.length; i < l; i++ ){
+            a = a * arguments[i];
+        }
+        return a;
+    };
+    var plus = function () {
+        console.log('begin');
+        var a = 0;
+        for (var i = 0, l = arguments.length; i < l; i++ ){
+            a = a + arguments[i];
+        }
+        return a;
+    };
+    var proxy = function (fn) {
+        var cache = {};
+        return function () {
+            var args = Array.prototype.join.call(arguments, ',');
+            //  console.log(arguments.sort());  //arguments.sort is not a function(…)
+            console.log(args + 'aa' + arguments);
+            if (args in cache){
+                return cache[args];
+            }
+            return cache[args] = fn.apply(this,arguments);
+        };
+    };
+    var proxyMult = proxy(mult);
+    var proxyPlus = proxy(plus);
+    console.log(proxyMult(1,2,3,4));
+    console.log(proxyPlus(1,2,3,4));
+</script>
+</body>
+</html>

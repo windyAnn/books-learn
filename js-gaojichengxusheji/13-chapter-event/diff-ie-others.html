@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="btn" id="btn">
+<script>
+    var EventUtil = {
+        addHandler: function (ele, type, handler) {
+            if (ele.addEventListener){
+                ele.addEventListener(type, handler, false);
+            }else if (ele.attachEvent){
+                ele.attachEvent("on"+type, handler);
+            }else {
+                ele["on" + type] = handler;
+            }
+        },
+        getEvent: function (event) {
+            return  event ? event : window.event;
+        },
+        getTarget: function (event) {
+            return event.target || event.srcElement;
+        },
+        preventDefault: function (event) {
+            if (event.preventDefault){
+                event.preventDefault();
+            } else {
+                event.returnValue = false;
+            }
+        },
+        stopPropagation: function () {
+            if (event.stopPropagation){
+                event.stopPropagation();
+            } else {
+                event.cancelBubble = true;
+            }
+        },
+
+        removeHander: function (ele, type, handler) {
+            if (ele.removeEventListener){
+                ele.removeEventListener(type, handler, false);
+            }else if (ele.detachEvent){
+                ele.detachEvent("on"+type, handler);
+            }else {
+                ele["on" + type] = null;
+            }
+        },
+        getRelatedTarget: function (event) {
+            if (event.relatedTarget){
+                return event.relatedTarget;
+            }else if (event.toElement){
+                return event.toElement;
+            }else if (event.fromElement){
+                return event.fromElement;
+            }else {
+                return null;
+            }
+        }
+    };
+    /*  var btn = document.querySelector("#btn");
+   EventUtil.addHandler(btn, "click", function (event) {
+       var events = EventUtil.getEvent(event);
+        var keys = new Array();
+     if (events.shiftKey){  //检测键盘按得哪个，与鼠标同时按下。
+         keys.push("shift");
+     }
+        alert("keys:" + keys);
+    })
+
+    //getRelatedTarget
+    var btn = document.querySelector("#btn");
+    EventUtil.addHandler(btn, "mouseover", function (event) {
+        var events = EventUtil.getEvent(event);
+        var target = EventUtil.getTarget(events);
+        var relatedTarget = EventUtil.getRelatedTarget(events);
+        alert("mouse out of" + target.tagName + "to" + relatedTarget.tagName)
+
+    });
+    */
+    //mousewheel滚轮事件
+    var btn = document.querySelector("#btn");
+    EventUtil.addHandler(document, "mousewheel" , function (e) {
+        var event = EventUtil.getEvent(e);
+        alert(event.wheelDelta) ; //0 检测正负可以知道鼠标是往哪个方向滚动
+    })
+</script>
+</body>
+</html>

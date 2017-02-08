@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*  (function () {
+     Array.prototype.push.call(arguments, 4);
+     console.log(arguments);
+     })(1,2,3)
+     */
+    Function.prototype.uncurrying = function () {
+        var self = this;
+        return function () {
+            var obj = Array.prototype.shift.call(arguments);//argumentsP,4 2个参数
+            return self.apply(obj, arguments);
+            // obj = argumentsP  arguments = 4,self = Array.prototype.push()
+        }
+    };
+
+    for (var i = 0, fn, arr = ['push', 'shift', 'forEach']; fn = arr[i++];) {
+        Array[fn] = Array.prototype[fn].uncurrying();
+    }
+    var obj = {
+      length: 3,
+        "0": 1,
+        "1": 2,
+        "2": 3
+    };
+    Array.push(obj, 4);
+    console.log(obj.length);
+    Array.forEach(obj, function (i, n) {
+        console.log(n);
+        console.log(i+"aa");
+    });
+   /* (function () {
+        push(arguments, 4);
+        console.log(arguments)
+    })(1, 2, 3)*/
+
+</script>
+</body>
+</html>

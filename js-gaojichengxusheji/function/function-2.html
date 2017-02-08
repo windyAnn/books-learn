@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<script>
+    /*
+    var factotial = (function f(num) {
+        if (num <= 1){
+            return 1;
+        }else {
+            return num * f(num-1);
+        }
+    });
+    alert(factotial(5));//120
+    var a = factotial;
+    factotial = null;
+    alert(a(5));  //120
+    */
+    /*
+    function creatF() {
+        var result = new Array();
+        for (var i=0; i<10; i++){
+            result[i] = function () {  //result[i] =function,而不是0，1，2.。。。
+                return i;
+            }
+        }
+        return result;
+    }
+    var res = creatF();
+    alert(res);//一系列的function
+    function creatF1() {
+        var result = new Array();
+        for (var i=0; i<10; i++){
+            result[i] = i;
+        }
+        return result;
+    }
+    var res1 = creatF1();
+    alert(res1);//0,1,2,3,4,....
+    function creatF2() {
+        var result = new Array();
+        for (var i=0; i<10; i++){
+            result[i] = (function (num) {
+                return num;
+            })(i);
+        }
+        return result;
+    }
+    alert(creatF2());//0,1,2,3,4,....
+    function creatF2() {
+        var result = new Array();
+        for (var i=0; i<10; i++){
+            result[i] = function (num) {
+                return function () {
+                    return num;
+                };
+            }(i);
+        }
+        return result;
+    }
+    alert(creatF2());//0,1,2,3,4,....
+    */
+  /*
+    var name = "window";
+    var obj = {
+        name: "my object",
+        getN: function () {
+            return function () {
+                return this.name;
+            }
+        }
+    };
+    alert(obj.getN()());  //window
+
+    var name1 = "window";
+    var obj1 = {
+        name: "my object",
+        getN: function (age) {
+            var that = this;
+            return function () {
+                return that.name;
+            }
+        }
+    };
+    alert(obj1.getN()());  //my object
+    */
+    var name = "window";
+    var obj = {
+        name: "my object",
+        getN: function (n1) {
+            return function (n2) {
+                return arguments[0] + arguments[1];
+            }
+        }
+    };
+    alert(obj.getN(2)(3));  //null  arguments是取不到外面的，但是如果n1和n2却不同；
+    var name1 = "window";
+    var obj1 = {
+        name: "my object",
+        getN: function (n1) {
+            return function (n2) {
+                return n1 + n2;
+            }
+        }
+    };
+    alert(obj1.getN(2)(3));  //5
+</script>
+</body>
+</html>

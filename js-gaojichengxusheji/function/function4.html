@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+
+    var singV = function () {  //这种定义一个变量，然后将一个匿名函数调用，并赋值给他是ok
+        var privateV = 10;
+        function privateF() {
+            return false;
+        }
+        return{
+            publicPro: true,
+            publicF: function () {
+                privateV++;
+                alert(privateV);
+                return privateF();
+            }
+        }
+    }();
+    alert(singV.publicPro);  //true;
+    alert(singV.publicF());  // 11 false
+*/
+    /*
+    (function () {
+        var name = "";
+        function Person(value) {
+            name = value;
+        }
+        Person.prototype = {
+            getName: function () {
+                return name;
+            },
+            setName: function (value) {
+                name = value;
+            }
+        };
+
+    })();
+    var person1 = new Person();
+    person1.setName("aa");
+    alert(person1.getName());//Person is undefined;
+
+*/
+    (function () {
+        var name = "";
+        Person =   function (value) {
+            name = value;
+        };
+        Person.prototype = {
+            getName: function () {
+                return name;
+            },
+            setName: function (value) {
+                name = value;
+            }
+        };
+
+    })();
+
+    var person2 = new Person("aa");
+   // person2.setName();
+    alert(person2.getName());//aa
+    var person3 = new Person("cc");
+    alert(person3.getName());//cc
+    alert(person2.getName());//cc
+</script>
+</body>
+</html>

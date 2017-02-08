@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var name = 'Abe Lincoln';
+    var re = /^(\w+)\s(\w+)/;
+    var result = re.exec(name);
+    console.log(result);
+    var newName = result[1] +","+ result[2];
+</script>
+</body>
+</html>

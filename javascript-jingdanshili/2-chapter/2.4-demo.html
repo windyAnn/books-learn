@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var mArr = [];
+    mArr[0] = ['aa', 'bb'];
+    mArr[1] = ['c','m'];
+    var nArr = mArr.slice(1,2);
+    console.log(mArr[1]);
+    nArr[0][0] = 'xx';
+    console.log(nArr[0]);
+    console.log(mArr[1]);
+
+
+    /*第一次打开的时候
+    *
+    * Array[2]0: "xx"1: "m"length: 2__proto__: Array[0]
+     2.4-demo.html:15 Array[2]0: "xx"1: "m"length: 2__proto__: Array[0]
+     2.4-demo.html:16 Array[2]0: "xx"1: "m"length: 2__proto__: Array[0]
+
+     第二次刷新的时候Array[2]0: "c"1: "m"其他不变？？？
+     */
+</script>
+</body>
+</html>

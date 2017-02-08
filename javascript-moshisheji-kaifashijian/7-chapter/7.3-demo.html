@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var Iterator = function (obj) {
+        var cur = 0;
+        var next = function () {
+            cur++;
+        };
+        var isDone = function () {
+            return cur >= obj.length;
+        };
+        var getCurItem = function () {
+            return obj[cur];
+        };
+        return {
+            next: next,
+            isDone: isDone,
+            getCurItem: getCurItem
+        };
+    };
+    var compare = function (iterator1, iterator2) {
+        while (!iterator1.isDone() && !iterator2.isDone()){
+            if (iterator1.getCurItem() !== iterator2.getCurItem()){
+                throw new Error('iterator1!=iterator2');
+            }
+            iterator1.next();
+            iterator2.next();
+        }
+        alert('iterator1 = iterator2');
+    };
+    var iterator1 = new Iterator([1,2,3,4]);
+    var iterator2 = new Iterator([1,2,3,4]);
+    compare(iterator1, iterator2);
+</script>
+</body>
+</html>

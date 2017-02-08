@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  /*  var mes = "some string";
+    console.log(typeof mes);
+    console.log(typeof (mes));//括号不是必须的typeof是操作符不是函数
+    console.log(typeof 5);
+    //typeof 操作符的操作数可以是变量，也可以是数字字面量，typeof是操作符不是函数
+    console.log(typeof null);  //object,由于null是空对象的引用
+//undefined 类型
+  //  var mes2 ;
+   // alert(mes2 == undefined);
+    var mes3;
+    var age;
+    alert(mes3);  //两个都是undefined，并没有报错，与书上有不同。
+    alert(age);
+    //null类型
+    //null是表示空对象
+    var car = null;
+    console.log(typeof car);
+    //如果定义的变量是用来保存对象的，那么最好初始化的时候null
+    car = "aa";  //字符串也是对象
+    if (car != null){
+        alert(car);
+    }
+    */
+
+ // alert(null == undefined);  //true,原因：undefined值是派生自null的。
+    //但是用法却不相同
+
+    //Boolean类型
+ /*   var mes = "hello";
+    var mesBool = Boolean(mes);//可以用Boolean(mes)来判断是true或者false
+    alert(mesBool);//返回true
+    var mes1 = "he";
+    if(mes1){
+        alert("value");
+    }
+    */
+ //Number类型
+    //数值的范围：
+  // js中有最大数和最小数，Number.MIN_VALUE和Number.MAX_VALUE
+  /*
+    var res1 = Number.MIN_VALUE + Number.MAX_VALUE;
+
+  var res2 =Number.MIN_VALUE + Number.MIN_VALUE;
+    alert(isFinite(res1));//true  与书上的不相同啊
+    alert(isFinite(res2));//true  与书上的不相同啊
+    alert(isFinite(12));  //true   isFinite(n)n如果是在正无穷大到负无穷大之间的数值，返回的是true；
+  */
+
+  /*
+  //Number类型
+  //NaN :
+  //非数值（not a number）是一个特殊的数值，NuN的任何操作都会返回NaN，
+  //  alert(NaN/10);   //返回NaN
+    //NaN :与任何值都不想等
+   // alert(NaN == NaN); //false
+    //isNaN()
+  alert(isNaN(NaN));  //true
+    alert(isNaN(10));  //false
+    alert(isNaN("10"));//false(可以被转换成10)
+    alert(isNaN("blue"));  //true
+    alert(isNaN(true));//false (可以被转换成1)
+  alert(!isNaN(10));  //false
+  /*
+
+  /*
+  //数值转换
+    //Number()
+    alert(Number(null));  //0,  为什么null是0 呢？
+    alert(Number(undefined)); //NaN,不是一个数字
+   alert(Number("1"));
+    alert(Number("012")); //12,  0会被忽略
+    alert(Number("0xf"));  //15 , 转化为大小相同的十进制数值
+    alert(Number(""));  //0,   空字符串
+    var obj = "0123xy",
+            obj1 = "0123";
+    alert(Number(obj)); //NaN
+  alert(Number(obj1));  //123, 如果是对象，则调用对象的valueOf()方法，然后依照前面的规则转换返回的值。
+
+  */
+
+  /*
+//parseInt
+    var n1 = parseInt("10", 2);//2,第二个参数表示多少进制的格式转化
+  var n2 = parseInt("10", 10);//10
+    alert(n1+"nnn"+ n2);
+    */
+
+  /*
+  //string
+    var text = "this is \u03a3.";//   \u03a3表示某个希腊字母
+alert(text);
+  alert(text.length);  // \u03a3字符创长度为1
+  */
+
+
+  /*
+//toString
+    var age = 11;
+    var ageTostring = age.toString();
+//    alert(ageTostring);  //null和undefined没有这个方法toString，可以用string，其他的类型都有。
+
+var n = 10;
+    alert(n.toString(2));  //0101，   括号里的参数表示转化成什么格式
+    alert(n.toString(10));   //10,默认是10
+
+    */
+/*
+    var v = null;
+    alert(String(v));
+    var v2 ;
+    alert(String(v2));
+    */
+
+//操作符
+  /*
+    var n = 29;
+    var n1 = n++;
+    alert(n);  //30
+    alert(n1);  //29
+
+    var n2 = 29;
+    var n3 = ++n2;
+    alert(n2+'qq'+n3);  //n2 : 30,  n3 : 30
+    */
+
+  /*
+    var n1 = 29;
+    var n2 = n1-- + 2;
+    alert(n1);//28   29-1
+    alert(n2);//31   29+2
+    */
+ /*
+ var n1 = {
+      valueOf: function () {  //这个valueOf能获取到-1这个值？？？
+          return -1;
+      }
+  };
+  n1--;
+  alert(n1);  //-2
+///////////////////
+ var n2 = {
+     num: function () {
+         return 2;
+     }
+ };
+ var n3 = n2.num();
+    n3--;
+    alert(n3);  //1
+  */
+/*
+ var b = false;
+   alert( b++);//0  虽然这里只是调用了   但是仍然加1了
+    alert(b);//1
+*/
+/*
+var n = 25;
+    num = +n;
+    alert(num);  //25,一个加号不会产生影响，但是对非数值可以进行转化
+
+
+    var n1 = "01";
+    n2 = +n1;
+    alert(n2 + "a" + n1);
+
+    */
+/*
+//按位非~
+var n1 = 25;
+    n2 = ~n1 ;  //~按位非  可以-n1-1,但是按位非操作的本质是操作数的负值-1，因此速度更快。
+    alert(n2); //-26
+  */
+/*
+//按位与&
+    var r = 25&3;
+    alert(r);
+*/
+/*
+//逻辑非！
+    alert(! false);  //true;
+    alert(! "blue");//false
+    alert(! 0);     //true
+    alert(! NaN);   //true
+    alert(! "");    //true
+    alert(! 123);//false
+    */
+/*
+//逻辑与&
+    var f = false ;
+    var fr = (f&&s);  //一个&和2个是有差别的。
+    alert(fr);  //false；
+
+
+  var f1 = true ;
+  var fr1 = (f1&&s);
+  alert(fr1);  //报错，s没有定义
+  */
+
+
+/*
+var f = false;
+    var r = (f || s);  //报错s undefined；如果第一个是false那么会接着执行第二个。  跟&&这个刚好相反
+    alert(r);
+
+    var  f1 = true;
+  var r = (f1 || s);
+  alert(r);  //true
+
+  */
+/*
+var c = 2;
+    for (var i=0; i<c; i++){
+        alert(i);
+    }
+alert(i + "aa");  //2aa,这里只会alert一次
+
+*/
+/*
+var n = 0;
+    for (var i=1; i<20;i++){
+        if (i%5 == 0){
+            break;  //break后，就不会再执行整个for操作了。
+        }
+        n++;
+        alert(n + "aa" + i);
+    }
+    alert(n);  //4
+    */
+/*
+  var n = 0;
+  for (var i=1; i<5;i++){
+      if (i%2 == 0){
+          continue;  //continue是不会执行下面的n++;而是返回到for循环的顶部 ，
+      }
+      n++;
+      alert(n + "aa" + i);
+  }
+  alert(n);  //2
+  */
+/*
+var n = 0;
+    outermost:
+    for (var i=0; i<10; i++){
+        for (var j=0; j<10; j++){  //i=0,1,2,3,4的时候，j要循环10次，当i=5时，j循环5次，
+            if (i == 5 && j == 5){
+                break outermost;
+            }
+            n++;
+        }
+    }
+    alert(n); //55
+    */
+/*
+  var n = 0;
+  outermost:
+          for (var i=0; i<10; i++){
+              for (var j=0; j<10; j++){  //
+                  if (i == 5 && j == 5){
+                      continue outermost;  //返回到最顶端，从i= 6 开始啦
+                  }
+                  n++;
+              }
+          }
+  alert(n); //95
+*/
+
+</script>
+</body>
+
+</html>

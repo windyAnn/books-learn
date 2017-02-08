@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Car (desc) {
+        this.desc = desc;
+        this.color = "red";
+    }
+
+    Car.prototype = {
+        getInfo: function() {
+            return 'A ' + this.color + ' ' + this.desc + '.';
+        }
+    };
+    //instantiate object using the constructor function
+    var car =  Object.create(Car.prototype);
+    //与new一下有点相似，但是只是截获原型上的属性，构造函数里的属性无法获取，
+   // car.color = "blue";
+    alert(car.getInfo());  //this.color  undefined
+</script>
+</body>
+</html>
